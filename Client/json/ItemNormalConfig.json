@@ -1,0 +1,38 @@
+{
+  "1": {
+    "1001": {
+      "itemType": 1,
+      "itemId": 1001,
+      "itemName": "铁剑",
+      "itemDesc": "新手基础近战武器",
+      "price": 100,
+      "stackable": false
+    },
+    "1002": {
+      "itemType": 1,
+      "itemId": 1002,
+      "itemName": "钢剑",
+      "itemDesc": "进阶近战武器",
+      "price": 300,
+      "stackable": false
+    }
+  },
+  "2": {
+    "2001": {
+      "itemType": 2,
+      "itemId": 2001,
+      "itemName": "红药水",
+      "itemDesc": "恢复 100 点生命值",
+      "price": 50,
+      "stackable": true
+    },
+    "2002": {
+      "itemType": 2,
+      "itemId": 2002,
+      "itemName": "蓝药水",
+      "itemDesc": "恢复 80 点魔法值",
+      "price": 60,
+      "stackable": true
+    }
+  }
+}

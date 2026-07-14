@@ -1,0 +1,10 @@
+{
+  "ConfigKey": 1,
+  "StartGold2": 2,
+  "MaxLevel": {
+    "key": 1,
+    "value": 1
+  },
+  "StartGold": 2,
+  "BattleTimeLimit": 1
+}

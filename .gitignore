@@ -1,0 +1,7 @@
+node_modules/
+.agents/
+.Client.staging-*/
+.Client.backup-*/
+.Server.staging-*/
+.Server.backup-*/
+Tools/ValidationReport.txt

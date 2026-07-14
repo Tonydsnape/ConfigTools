@@ -1,0 +1,21 @@
+{
+  "name": "commercial-config-exporter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Excel to JSON and MessagePack configuration exporter",
+  "main": "src/cli.js",
+  "scripts": {
+    "export:client": "node src/cli.js --target client",
+    "export:server": "node src/cli.js --target server",
+    "validate": "node Tools/validate-config.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@msgpack/msgpack": "3.1.2",
+    "exceljs": "4.4.0",
+    "json5": "2.2.3"
+  }
+}

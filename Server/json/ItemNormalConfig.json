@@ -1,0 +1,38 @@
+{
+  "1": {
+    "1001": {
+      "itemType": 1,
+      "itemId": 1001,
+      "itemName": "铁剑",
+      "dropWeight": 500,
+      "price": 100,
+      "stackable": false
+    },
+    "1002": {
+      "itemType": 1,
+      "itemId": 1002,
+      "itemName": "钢剑",
+      "dropWeight": 200,
+      "price": 300,
+      "stackable": false
+    }
+  },
+  "2": {
+    "2001": {
+      "itemType": 2,
+      "itemId": 2001,
+      "itemName": "红药水",
+      "dropWeight": 1000,
+      "price": 50,
+      "stackable": true
+    },
+    "2002": {
+      "itemType": 2,
+      "itemId": 2002,
+      "itemName": "蓝药水",
+      "dropWeight": 800,
+      "price": 60,
+      "stackable": true
+    }
+  }
+}

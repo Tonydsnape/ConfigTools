@@ -127,37 +127,6 @@ function worksheetHasData(worksheet) {
   return hasData;
 }
 
-function inferBaseValue(cell, filePath, worksheet) {
-  const value = getCellValue(cell, filePath, worksheet);
-  const location = locationOf(filePath, worksheet, cell.address);
-  if (isBlank(value)) {
-    throw new ConfigError('Value 不能为空', location);
-  }
-  if (typeof value === 'number') {
-    if (!Number.isFinite(value)) throw new ConfigError('数字必须是有限值', location);
-    return value;
-  }
-  if (typeof value === 'boolean') return value;
-  if (typeof value !== 'string') {
-    throw new ConfigError(`无法自动识别值类型 ${typeof value}`, location);
-  }
-
-  const trimmed = value.trim();
-  if (trimmed.startsWith('{') || trimmed.startsWith('[')) {
-    let parsed;
-    try {
-      parsed = JSON5.parse(trimmed);
-    } catch (error) {
-      throw new ConfigError(`JSON5 解析失败：${error.message}`, location);
-    }
-    if (parsed === null || typeof parsed !== 'object') {
-      throw new ConfigError('复杂值必须解析为对象或数组', location);
-    }
-    return parsed;
-  }
-  return value;
-}
-
 function parseInteger(value, location) {
   if (typeof value !== 'number' || !Number.isInteger(value)) {
     throw new ConfigError('int 必须是 Excel 整数单元格', location);
@@ -243,8 +212,9 @@ function rowIsBlank(worksheet, rowNumber, startColumn, endColumn, filePath) {
 function parseBaseSheet(worksheet, filePath, metadata) {
   const errors = [];
   capture(errors, () => expectText(worksheet.getCell('A3'), 'KeyName', filePath, worksheet));
-  capture(errors, () => expectText(worksheet.getCell('B3'), 'Type', filePath, worksheet));
-  capture(errors, () => expectText(worksheet.getCell('C3'), 'Value', filePath, worksheet));
+  capture(errors, () => expectText(worksheet.getCell('B3'), 'Target', filePath, worksheet));
+  capture(errors, () => expectText(worksheet.getCell('C3'), 'ValueType', filePath, worksheet));
+  capture(errors, () => expectText(worksheet.getCell('D3'), 'Value', filePath, worksheet));
   if (metadata.keyCount !== 1) {
     errors.push(new ConfigError('base 表的 Key 必须为 1', locationOf(filePath, worksheet, 'B2')));
   }
@@ -253,19 +223,26 @@ function parseBaseSheet(worksheet, filePath, metadata) {
   const names = new Set();
   let hasDataRow = false;
   for (let rowNumber = 4; rowNumber <= worksheet.rowCount; rowNumber += 1) {
-    if (rowIsBlank(worksheet, rowNumber, 1, 3, filePath)) continue;
+    if (rowIsBlank(worksheet, rowNumber, 1, 4, filePath)) continue;
     hasDataRow = true;
     const nameCell = worksheet.getCell(rowNumber, 1);
     const rowErrors = [];
     const name = capture(rowErrors, () => requiredString(nameCell, filePath, worksheet, 'KeyName'));
     const target = capture(rowErrors, () => parseTargetFlag(worksheet.getCell(rowNumber, 2), filePath, worksheet));
-    const value = capture(rowErrors, () => inferBaseValue(worksheet.getCell(rowNumber, 3), filePath, worksheet));
+    const rawType = capture(rowErrors, () => requiredString(worksheet.getCell(rowNumber, 3), filePath, worksheet, 'ValueType'));
+    const type = rawType && rawType.toLowerCase();
+    if (type !== undefined && !FIELD_TYPES.has(type)) {
+      rowErrors.push(new ConfigError(`ValueType 只允许 ${[...FIELD_TYPES].join('/')}`, locationOf(filePath, worksheet, worksheet.getCell(rowNumber, 3).address)));
+    }
+    const value = type && FIELD_TYPES.has(type)
+      ? capture(rowErrors, () => parseTypedValue(worksheet.getCell(rowNumber, 4), type, filePath, worksheet))
+      : undefined;
     if (name !== undefined && names.has(name)) {
       rowErrors.push(new ConfigError(`重复 KeyName "${name}"`, locationOf(filePath, worksheet, nameCell.address)));
     }
     if (name !== undefined) names.add(name);
     errors.push(...rowErrors);
-    if (rowErrors.length === 0) entries.push({ name, target, value });
+    if (rowErrors.length === 0) entries.push({ name, target, type, value });
   }
   if (!hasDataRow) errors.push(new ConfigError('base 表没有数据行', locationOf(filePath, worksheet, 'A4')));
   throwCollected(errors);
@@ -544,6 +521,7 @@ async function exportConfigurations({ rootDir, target }) {
 
 module.exports = {
   buildData,
+  commitOutput,
   createArtifacts,
   exportConfigurations,
   loadConfigurations,

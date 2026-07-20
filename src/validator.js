@@ -4,6 +4,7 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const { ConfigError, ConfigValidationError } = require('./errors');
 const { loadConfigurations } = require('./exporter');
+const { loadDelivery } = require('./delivery');
 
 async function countWorkbookFiles(rootDir) {
   const entries = await fs.readdir(rootDir, { withFileTypes: true });
@@ -41,6 +42,7 @@ async function validateAndWriteReport({ rootDir, reportPath }) {
 
   try {
     configurations = await loadConfigurations(rootDir);
+    await loadDelivery(rootDir, configurations);
   } catch (error) {
     if (error instanceof ConfigValidationError) errors = error.errors;
     else if (error instanceof ConfigError) errors = [error];

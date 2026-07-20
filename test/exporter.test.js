@@ -13,6 +13,8 @@ const {
   loadConfigurations
 } = require('../src/exporter');
 const { validateAndWriteReport } = require('../src/validator');
+const { loadDelivery } = require('../src/delivery');
+const { generateCSharp } = require('../src/codegen');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -35,10 +37,10 @@ async function writeSimpleBase(filePath, options = {}) {
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet(options.sheetName || 'Base');
   setMetadata(sheet, options.name || 'SimpleBase', 'base', 1);
-  sheet.getRow(3).values = ['KeyName', 'Type', 'Value'];
-  sheet.getRow(4).values = ['ConfigKey', 'sc', 1];
-  sheet.getRow(5).values = ['Enabled', 'sc', true];
-  if (options.formula) sheet.getCell('C5').value = { formula: '1=1', result: true };
+  sheet.getRow(3).values = ['KeyName', 'Target', 'ValueType', 'Value'];
+  sheet.getRow(4).values = ['ConfigKey', 'sc', 'int', 1];
+  sheet.getRow(5).values = ['Enabled', 'sc', 'bool', true];
+  if (options.formula) sheet.getCell('D5').value = { formula: '1=1', result: true };
   await workbook.xlsx.writeFile(filePath);
 }
 
@@ -138,14 +140,59 @@ test('rejects formulas and preserves prior output when validation fails', async 
   await writeSimpleBase(path.join(directory, 'Formula.xlsx'), { name: 'FormulaBase', formula: true });
   await assert.rejects(
     exportConfigurations({ rootDir: directory, target: 'client' }),
-    /Formula\.xlsx \[Base\] 第 5 行 \(C5\): 不支持公式单元格/
+    /Formula\.xlsx \[Base\] 第 5 行 \(D5\): 不支持公式单元格/
   );
   assert.deepEqual(await fs.readFile(outputPath), previous);
+});
+
+test('delivery catalog covers every config and generated C# exposes typed accessors', async () => {
+  const configurations = await loadConfigurations(ROOT);
+  const delivery = await loadDelivery(ROOT, configurations);
+  const source = generateCSharp(configurations, delivery);
+  assert.match(source, /public static class GlobalBaseConfig/);
+  assert.match(source, /public static int StartGold/);
+  assert.match(source, /TryGet\(int itemType, int itemId, out ItemNormalConfigRow row\)/);
+  assert.deepEqual(delivery.stages.map((stage) => stage.tag), ['config_startup', 'config_item']);
+});
+
+test('delivery rejects unassigned configs', async (t) => {
+  const directory = await temporaryDirectory(t);
+  await fs.writeFile(path.join(directory, 'config-delivery.json'), JSON.stringify({
+    schemaVersion: 1,
+    stages: [{
+      stageId: 'startup', tag: 'config_startup', includeInBase: true,
+      loadPolicy: 'startup', dataVersion: 1, configs: ['AssignedConfig']
+    }]
+  }));
+  await assert.rejects(
+    loadDelivery(directory, [{ name: 'AssignedConfig' }, { name: 'MissingConfig' }]),
+    /配置 MissingConfig 未登记投放阶段/
+  );
+});
+
+test('C# generator escapes reserved field names', () => {
+  const configurations = [{
+    name: 'KeywordConfig', type: 'base', keyCount: 1, entries: [
+      { name: 'class', target: 'c', type: 'int', value: 1 }
+    ]
+  }];
+  const delivery = { stages: [{
+    stageId: 'startup', tag: 'config_startup', includeInBase: true,
+    loadPolicy: 'startup', dataVersion: 1, configs: ['KeywordConfig']
+  }] };
+  assert.match(generateCSharp(configurations, delivery), /public int @class/);
 });
 
 test('validation tool aggregates row errors and writes a UTF-8 report', async (t) => {
   const directory = await temporaryDirectory(t);
   await writeTypedNormal(path.join(directory, 'Multiple.xlsx'), { multipleErrors: true });
+  await fs.writeFile(path.join(directory, 'config-delivery.json'), JSON.stringify({
+    schemaVersion: 1,
+    stages: [{
+      stageId: 'typed', tag: 'config_typed', includeInBase: false,
+      loadPolicy: 'onDemand', dataVersion: 1, configs: ['TypedConfig']
+    }]
+  }));
   const reportPath = path.join(directory, 'Tools', 'ValidationReport.txt');
 
   const result = await validateAndWriteReport({ rootDir: directory, reportPath });

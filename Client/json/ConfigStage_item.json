@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "stageId": "item",
+  "tag": "config_item",
+  "loadPolicy": "onDemand",
+  "includeInBase": false,
+  "dataVersion": 1,
+  "configs": [
+    {
+      "name": "ItemNormalConfig",
+      "type": "normal",
+      "schemaHash": "ce94647303bb21e20805d08c53407e719e92cced291020a24e6b5f8f2a97ea7e",
+      "payloadSha256": "e1dafc37c591ce8d0c046609259142170addf2ce68bbdcf34eeb3b7ad890ff9b"
+    }
+  ]
+}

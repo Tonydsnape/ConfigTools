@@ -7,6 +7,7 @@
   "scripts": {
     "export:client": "node src/cli.js --target client",
     "export:server": "node src/cli.js --target server",
+    "migrate:base-schema": "node Tools/migrate-base-schema.js",
     "validate": "node Tools/validate-config.js",
     "test": "node --test"
   },

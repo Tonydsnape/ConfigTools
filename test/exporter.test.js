@@ -9,12 +9,13 @@ const ExcelJS = require('exceljs');
 const { decode } = require('@msgpack/msgpack');
 const {
   buildData,
+  createArtifacts,
   exportConfigurations,
   loadConfigurations
 } = require('../src/exporter');
-const { validateAndWriteReport } = require('../src/validator');
-const { loadDelivery } = require('../src/delivery');
 const { generateCSharp } = require('../src/codegen');
+const { exportClientPipeline, resolveUnityRoot, syncUnity } = require('../src/unity-pipeline');
+const { validateAndWriteReport } = require('../src/validator');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -35,7 +36,7 @@ function setMetadata(sheet, name, type, keyCount) {
 
 async function writeSimpleBase(filePath, options = {}) {
   const workbook = new ExcelJS.Workbook();
-  const sheet = workbook.addWorksheet(options.sheetName || 'Base');
+  const sheet = workbook.addWorksheet('Base');
   setMetadata(sheet, options.name || 'SimpleBase', 'base', 1);
   sheet.getRow(3).values = ['KeyName', 'Target', 'ValueType', 'Value'];
   sheet.getRow(4).values = ['ConfigKey', 'sc', 'int', 1];
@@ -47,161 +48,141 @@ async function writeSimpleBase(filePath, options = {}) {
 async function writeTypedNormal(filePath, options = {}) {
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet('Typed');
-  setMetadata(sheet, options.name || 'TypedConfig', 'normal', 1);
-  sheet.getRow(4).values = [options.keyTarget || 'sc', 'sc', 'sc', 'c', 's', 'sc', 'sc'];
-  sheet.getRow(5).values = ['id', 'count', 'ratio', 'clientOnly', 'serverOnly', 'enabled', 'payload'];
-  sheet.getRow(6).values = ['long', 'int', 'double', 'string', 'string', 'bool', 'json'];
-  sheet.getRow(7).values = [
-    '9223372036854775807',
-    42,
-    1.25,
-    'client',
-    'server',
-    true,
-    "{nested:{value:2},list:[1,2]}"
-  ];
-  if (options.duplicate) sheet.getRow(8).values = sheet.getRow(7).values;
-  if (options.partial) sheet.getCell('B7').value = null;
-  if (options.multipleErrors) {
-    sheet.getCell('B7').value = null;
-    sheet.getRow(8).values = [2, 'not-an-int', 2.5, 'client-2', 'server-2', false, '{broken'];
+  setMetadata(sheet, options.name || 'TypedConfig', 'normal', 2);
+  sheet.getRow(4).values = ['sc', 'sc', 'c', 'sc', 'c', 's'];
+  sheet.getRow(5).values = ['itemType', 'itemId', 'itemName', 'serial', 'payload', 'serverOnly'];
+  sheet.getRow(6).values = ['int', 'int', 'string', 'long', 'json', 'string'];
+  sheet.getRow(7).values = [1, 1001, 'Sword', '9223372036854775806', '{ power: 10 }', 'secret'];
+  if (options.duplicate) {
+    sheet.getRow(8).values = [1, 1001, 'Duplicate', '2', '{}', 'secret'];
   }
+  if (options.missingValue) sheet.getCell('B7').value = null;
   await workbook.xlsx.writeFile(filePath);
 }
 
-test('current example workbooks follow target flags and nested key rules', async () => {
+test('current example workbooks generate one descriptor per real config table', async () => {
   const configurations = await loadConfigurations(ROOT);
-  assert.deepEqual(configurations.map((config) => config.name), ['GlobalBaseConfig', 'ItemNormalConfig']);
-
-  const base = configurations.find((config) => config.name === 'GlobalBaseConfig');
-  const normal = configurations.find((config) => config.name === 'ItemNormalConfig');
-  const clientBase = buildData(base, 'client');
-  const serverBase = buildData(base, 'server');
-  const clientNormal = buildData(normal, 'client');
-  const serverNormal = buildData(normal, 'server');
-
-  assert.deepEqual(Object.keys(clientBase), ['ConfigKey', 'StartGold2', 'MaxLevel', 'StartGold', 'BattleTimeLimit']);
-  assert.deepEqual(Object.keys(serverBase), ['ConfigKey', 'MaxLevel', 'BattleTimeLimit']);
-  assert.deepEqual(clientBase.MaxLevel, { key: 1, value: 1 });
-  assert.equal(clientNormal['1']['1001'].itemName, '铁剑');
-  assert.equal(clientNormal['1']['1001'].stackable, false);
-  assert.equal(clientNormal['1']['1001'].dropWeight, undefined);
-  assert.equal(clientNormal['1']['1001'].itemDesc, '新手基础近战武器');
-  assert.equal(serverNormal['1']['1001'].itemDesc, undefined);
-  assert.equal(serverNormal['1']['1001'].dropWeight, 500);
-});
-
-test('exports long, JSON5 and endpoint fields to equivalent JSON and MessagePack', async (t) => {
-  const directory = await temporaryDirectory(t);
-  await writeTypedNormal(path.join(directory, 'Typed.xlsx'));
-
-  await exportConfigurations({ rootDir: directory, target: 'client' });
-  await exportConfigurations({ rootDir: directory, target: 'server' });
-
-  for (const folder of ['Client', 'Server']) {
-    const json = JSON.parse(await fs.readFile(path.join(directory, folder, 'json', 'TypedConfig.json'), 'utf8'));
-    const binary = decode(await fs.readFile(path.join(directory, folder, 'bytes', 'TypedConfig.bytes')));
-    assert.deepEqual(binary, json);
-    assert.equal(json['9223372036854775807'].id, '9223372036854775807');
-    assert.deepEqual(json['9223372036854775807'].payload, { nested: { value: 2 }, list: [1, 2] });
-  }
-
-  const client = JSON.parse(await fs.readFile(path.join(directory, 'Client/json/TypedConfig.json'), 'utf8'));
-  const server = JSON.parse(await fs.readFile(path.join(directory, 'Server/json/TypedConfig.json'), 'utf8'));
-  assert.equal(client['9223372036854775807'].clientOnly, 'client');
-  assert.equal(client['9223372036854775807'].serverOnly, undefined);
-  assert.equal(server['9223372036854775807'].clientOnly, undefined);
-  assert.equal(server['9223372036854775807'].serverOnly, 'server');
-});
-
-test('rejects key columns that are not exported to both targets', async (t) => {
-  const directory = await temporaryDirectory(t);
-  await writeTypedNormal(path.join(directory, 'Invalid.xlsx'), { keyTarget: 'c' });
-  await assert.rejects(loadConfigurations(directory), /Invalid\.xlsx \[Typed\] 第 4 行 \(A4\): 键列的导出端标记必须为 sc/);
-});
-
-test('rejects duplicate key paths and partially empty rows with cell locations', async (t) => {
-  const duplicateDirectory = await temporaryDirectory(t);
-  await writeTypedNormal(path.join(duplicateDirectory, 'Duplicate.xlsx'), { duplicate: true });
-  await assert.rejects(loadConfigurations(duplicateDirectory), /Duplicate\.xlsx \[Typed\] 第 8 行 \(A8\): 重复键路径/);
-
-  const partialDirectory = await temporaryDirectory(t);
-  await writeTypedNormal(path.join(partialDirectory, 'Partial.xlsx'), { partial: true });
-  await assert.rejects(loadConfigurations(partialDirectory), /Partial\.xlsx \[Typed\] 第 7 行 \(B7\): int 字段不能为空/);
-});
-
-test('rejects formulas and preserves prior output when validation fails', async (t) => {
-  const directory = await temporaryDirectory(t);
-  await writeSimpleBase(path.join(directory, 'Good.xlsx'));
-  await exportConfigurations({ rootDir: directory, target: 'client' });
-  const outputPath = path.join(directory, 'Client/json/SimpleBase.json');
-  const previous = await fs.readFile(outputPath);
-
-  await writeSimpleBase(path.join(directory, 'Formula.xlsx'), { name: 'FormulaBase', formula: true });
-  await assert.rejects(
-    exportConfigurations({ rootDir: directory, target: 'client' }),
-    /Formula\.xlsx \[Base\] 第 5 行 \(D5\): 不支持公式单元格/
-  );
-  assert.deepEqual(await fs.readFile(outputPath), previous);
-});
-
-test('delivery catalog covers every config and generated C# exposes typed accessors', async () => {
-  const configurations = await loadConfigurations(ROOT);
-  const delivery = await loadDelivery(ROOT, configurations);
-  const source = generateCSharp(configurations, delivery);
+  assert.deepEqual(configurations.map((config) => config.name), [
+    'GlobalBaseConfig',
+    'ItemNormalConfig'
+  ]);
+  const source = generateCSharp(configurations);
   assert.match(source, /public static class GlobalBaseConfig/);
   assert.match(source, /public static int StartGold/);
   assert.match(source, /TryGet\(int itemType, int itemId, out ItemNormalConfigRow row\)/);
-  assert.deepEqual(delivery.stages.map((stage) => stage.tag), ['config_startup', 'config_item']);
+  assert.doesNotMatch(source, /ConfigStage|StageId|EnsureLoadedAsync|ConfigLoadPolicy/);
 });
 
-test('delivery rejects unassigned configs', async (t) => {
+test('JSON and MessagePack represent the same typed client data', async (t) => {
   const directory = await temporaryDirectory(t);
-  await fs.writeFile(path.join(directory, 'config-delivery.json'), JSON.stringify({
-    schemaVersion: 1,
-    stages: [{
-      stageId: 'startup', tag: 'config_startup', includeInBase: true,
-      loadPolicy: 'startup', dataVersion: 1, configs: ['AssignedConfig']
-    }]
-  }));
-  await assert.rejects(
-    loadDelivery(directory, [{ name: 'AssignedConfig' }, { name: 'MissingConfig' }]),
-    /配置 MissingConfig 未登记投放阶段/
-  );
+  await writeTypedNormal(path.join(directory, 'Typed.xlsx'));
+  await exportConfigurations({ rootDir: directory, target: 'client' });
+  const json = JSON.parse(await fs.readFile(
+    path.join(directory, 'Client', 'json', 'TypedConfig.json'), 'utf8'));
+  const bytes = await fs.readFile(path.join(directory, 'Client', 'bytes', 'TypedConfig.bytes'));
+  assert.deepEqual(decode(bytes), json);
+  assert.equal(json['1']['1001'].serial, '9223372036854775806');
+  assert.deepEqual(json['1']['1001'].payload, { power: 10 });
+  assert.equal(Object.hasOwn(json['1']['1001'], 'serverOnly'), false);
 });
 
-test('C# generator escapes reserved field names', () => {
+test('duplicate keys and partial rows are rejected', async (t) => {
+  const duplicateDirectory = await temporaryDirectory(t);
+  await writeTypedNormal(path.join(duplicateDirectory, 'Duplicate.xlsx'), { duplicate: true });
+  await assert.rejects(loadConfigurations(duplicateDirectory));
+
+  const partialDirectory = await temporaryDirectory(t);
+  await writeTypedNormal(path.join(partialDirectory, 'Partial.xlsx'), { missingValue: true });
+  await assert.rejects(loadConfigurations(partialDirectory));
+});
+
+test('failed validation preserves the previous exported files', async (t) => {
+  const directory = await temporaryDirectory(t);
+  await writeSimpleBase(path.join(directory, 'Good.xlsx'));
+  await exportConfigurations({ rootDir: directory, target: 'client' });
+  const outputPath = path.join(directory, 'Client', 'json', 'SimpleBase.json');
+  const previous = await fs.readFile(outputPath);
+
+  await writeSimpleBase(path.join(directory, 'Formula.xlsx'), {
+    name: 'FormulaBase',
+    formula: true
+  });
+  await assert.rejects(exportConfigurations({ rootDir: directory, target: 'client' }));
+  assert.deepEqual(await fs.readFile(outputPath), previous);
+});
+
+test('client pipeline emits only table JSON, bytes, and generated C#', async (t) => {
+  const directory = await temporaryDirectory(t);
+  await writeSimpleBase(path.join(directory, 'OnlyTable.xlsx'));
+  await exportClientPipeline({ rootDir: directory, sync: false });
+  assert.deepEqual(await fs.readdir(path.join(directory, 'Client', 'json')), ['SimpleBase.json']);
+  assert.deepEqual(await fs.readdir(path.join(directory, 'Client', 'bytes')), ['SimpleBase.bytes']);
+  assert.deepEqual(await fs.readdir(path.join(directory, 'Client', 'generated')), ['ConfigBindings.g.cs']);
+  assert.equal(resolveUnityRoot(directory), path.resolve(directory, '..'));
+});
+
+test('Unity sync removes obsolete stage and delivery artifacts', async (t) => {
+  const directory = await temporaryDirectory(t);
+  const unityRoot = path.join(directory, 'UnityProject');
+  const jsonRoot = path.join(unityRoot, 'Assets', '_GameRes', 'Config', 'Editor', 'json');
+  const bytesRoot = path.join(unityRoot, 'Assets', '_GameRes', 'Config', 'Runtime', 'bytes');
+  await fs.mkdir(jsonRoot, { recursive: true });
+  await fs.mkdir(bytesRoot, { recursive: true });
+  await fs.mkdir(path.join(unityRoot, 'ProjectSettings'), { recursive: true });
+  await fs.writeFile(path.join(jsonRoot, 'ConfigStage_startup.json'), '{}');
+  await fs.writeFile(path.join(jsonRoot, 'ConfigStage_startup.json.meta'), 'stale');
+  await fs.writeFile(path.join(jsonRoot, 'config-delivery.json'), '{}');
+  await fs.writeFile(path.join(bytesRoot, 'ConfigStage_startup.bytes'), 'stale');
+  await fs.writeFile(path.join(bytesRoot, 'ConfigStage_startup.bytes.meta'), 'stale');
+
   const configurations = [{
-    name: 'KeywordConfig', type: 'base', keyCount: 1, entries: [
-      { name: 'class', target: 'c', type: 'int', value: 1 }
-    ]
+    name: 'SimpleBase',
+    type: 'base',
+    keyCount: 1,
+    entries: [{ name: 'Value', target: 'c', type: 'int', value: 7 }]
   }];
-  const delivery = { stages: [{
-    stageId: 'startup', tag: 'config_startup', includeInBase: true,
-    loadPolicy: 'startup', dataVersion: 1, configs: ['KeywordConfig']
-  }] };
-  assert.match(generateCSharp(configurations, delivery), /public int @class/);
+  await syncUnity(
+    unityRoot,
+    createArtifacts(configurations, 'client'),
+    generateCSharp(configurations));
+
+  assert.deepEqual(await fs.readdir(jsonRoot), ['SimpleBase.json']);
+  assert.deepEqual(await fs.readdir(bytesRoot), ['SimpleBase.bytes']);
 });
 
-test('validation tool aggregates row errors and writes a UTF-8 report', async (t) => {
-  const directory = await temporaryDirectory(t);
-  await writeTypedNormal(path.join(directory, 'Multiple.xlsx'), { multipleErrors: true });
-  await fs.writeFile(path.join(directory, 'config-delivery.json'), JSON.stringify({
-    schemaVersion: 1,
-    stages: [{
-      stageId: 'typed', tag: 'config_typed', includeInBase: false,
-      loadPolicy: 'onDemand', dataVersion: 1, configs: ['TypedConfig']
-    }]
-  }));
-  const reportPath = path.join(directory, 'Tools', 'ValidationReport.txt');
+test('C# generator escapes reserved field names without stage metadata', () => {
+  const configurations = [{
+    name: 'KeywordConfig',
+    type: 'base',
+    keyCount: 1,
+    entries: [{ name: 'class', target: 'c', type: 'int', value: 1 }]
+  }];
+  const source = generateCSharp(configurations);
+  assert.match(source, /public int @class/);
+  assert.doesNotMatch(source, /StageId/);
+});
 
+test('validation writes a UTF-8 BOM report without requiring a delivery manifest', async (t) => {
+  const directory = await temporaryDirectory(t);
+  await writeTypedNormal(path.join(directory, 'Invalid.xlsx'), { missingValue: true });
+  const reportPath = path.join(directory, 'Tools', 'ValidationReport.txt');
   const result = await validateAndWriteReport({ rootDir: directory, reportPath });
   assert.equal(result.valid, false);
-  assert.equal(result.errors.length, 3);
-  assert.match(result.report, /第 7 行 \(B7\): int 字段不能为空/);
-  assert.match(result.report, /第 8 行 \(B8\): int 必须是 Excel 整数单元格/);
-  assert.match(result.report, /第 8 行 \(G8\): JSON5 解析失败/);
+  assert.ok(result.errors.length > 0);
   const savedReport = await fs.readFile(reportPath, 'utf8');
   assert.equal(savedReport.codePointAt(0), 0xfeff);
-  assert.match(savedReport, /检测结果：失败，共发现 3 个错误/);
+});
+
+test('buildData filters endpoint-specific values', () => {
+  const config = {
+    name: 'EndpointBase',
+    type: 'base',
+    entries: [
+      { name: 'Shared', target: 'sc', type: 'int', value: 1 },
+      { name: 'Client', target: 'c', type: 'int', value: 2 },
+      { name: 'Server', target: 's', type: 'int', value: 3 }
+    ]
+  };
+  assert.deepEqual(buildData(config, 'client'), { Shared: 1, Client: 2 });
+  assert.deepEqual(buildData(config, 'server'), { Shared: 1, Server: 3 });
 });

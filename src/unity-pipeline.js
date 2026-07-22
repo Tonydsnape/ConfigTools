@@ -3,7 +3,6 @@
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const { generateCSharp } = require('./codegen');
-const { buildStageArtifacts, loadDelivery } = require('./delivery');
 const { commitOutput, createArtifacts, loadConfigurations } = require('./exporter');
 const { ConfigError } = require('./errors');
 
@@ -61,23 +60,19 @@ async function syncUnityDirectory(target, files, extension) {
 }
 
 function resolveUnityRoot(configRoot, explicitRoot) {
-  const candidate = explicitRoot || process.env.MATCHINGGO_UNITY_ROOT || path.resolve(configRoot, '..', 'MatchingGoUnityDong');
+  const candidate = explicitRoot || process.env.MATCHINGGO_UNITY_ROOT || path.resolve(configRoot, '..');
   return path.resolve(candidate);
 }
 
-async function syncUnity(unityRoot, configArtifacts, stageArtifacts, csharp, delivery) {
+async function syncUnity(unityRoot, configArtifacts, csharp) {
   if (!await exists(path.join(unityRoot, 'Assets')) || !await exists(path.join(unityRoot, 'ProjectSettings'))) {
     throw new ConfigError(`Unity 工程路径无效：${unityRoot}`);
   }
   const root = path.join(unityRoot, 'Assets', '_GameRes', 'Config');
-  const jsonFiles = [...configArtifacts, ...stageArtifacts].map((artifact) => ({
+  const jsonFiles = configArtifacts.map((artifact) => ({
     name: `${artifact.name}.json`, content: artifact.json
   }));
-  jsonFiles.push({
-    name: 'config-delivery.json',
-    content: Buffer.from(`${JSON.stringify(delivery, null, 2)}\n`, 'utf8')
-  });
-  const byteFiles = [...configArtifacts, ...stageArtifacts].map((artifact) => ({
+  const byteFiles = configArtifacts.map((artifact) => ({
     name: `${artifact.name}.bytes`, content: artifact.bytes
   }));
   await syncUnityDirectory(path.join(root, 'Editor', 'json'), jsonFiles, '.json');
@@ -89,17 +84,15 @@ async function syncUnity(unityRoot, configArtifacts, stageArtifacts, csharp, del
 
 async function exportClientPipeline({ rootDir, unityRoot, sync = true }) {
   const configurations = await loadConfigurations(rootDir);
-  const delivery = await loadDelivery(rootDir, configurations);
   const configArtifacts = createArtifacts(configurations, 'client');
-  const stageArtifacts = buildStageArtifacts(delivery, configurations, configArtifacts);
-  await commitOutput(rootDir, 'client', [...configArtifacts, ...stageArtifacts]);
-  const csharp = generateCSharp(configurations, delivery);
+  await commitOutput(rootDir, 'client', configArtifacts);
+  const csharp = generateCSharp(configurations);
   await replaceDirectory(path.join(rootDir, 'Client', 'generated'), [
     { name: 'ConfigBindings.g.cs', content: Buffer.from(csharp, 'utf8') }
   ]);
   const resolvedUnityRoot = resolveUnityRoot(rootDir, unityRoot);
-  if (sync) await syncUnity(resolvedUnityRoot, configArtifacts, stageArtifacts, csharp, delivery);
-  return { configurations, delivery, unityRoot: resolvedUnityRoot };
+  if (sync) await syncUnity(resolvedUnityRoot, configArtifacts, csharp);
+  return { configurations, unityRoot: resolvedUnityRoot };
 }
 
 module.exports = { exportClientPipeline, resolveUnityRoot, syncUnity };

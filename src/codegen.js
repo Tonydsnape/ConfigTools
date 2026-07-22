@@ -6,6 +6,7 @@ const CS_TYPES = {
   float: 'float',
   double: 'double',
   string: 'string',
+  'string?': 'string',
   bool: 'bool',
   json: 'JToken'
 };
@@ -16,6 +17,7 @@ const CS_READERS = {
   float: 'ReadSingle',
   double: 'ReadDouble',
   string: 'ReadString',
+  'string?': 'ReadOptionalString',
   bool: 'ReadBoolean',
   json: 'ReadJson'
 };
@@ -178,7 +180,7 @@ function generateCSharp(configurations) {
 
   const descriptors = configurations.map((config) => {
     const className = identifier(config.name, '配置名');
-    return `            new ConfigDescriptor(${q(config.name)}, ${q(config.name)}, ${className}.Parse, ${className}.Publish, ${className}.Clear)`;
+    return `            new ConfigDescriptor(${q(config.name)}, ${config.required === false ? 'false' : 'true'}, ${q(config.name)}, ${className}.Parse, ${className}.Publish, ${className}.Clear)`;
   }).join(',\n');
   const names = configurations.map((config) => `                ${q(config.name)}`).join(',\n');
 

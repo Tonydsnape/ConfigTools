@@ -8,6 +8,7 @@
     "export:client": "node src/cli.js --target client",
     "export:server": "node src/cli.js --target server",
     "migrate:base-schema": "node Tools/migrate-base-schema.js",
+    "migrate:localization": "node Tools/import-localization.js",
     "validate": "node Tools/validate-config.js",
     "test": "node --test"
   },

@@ -16,6 +16,7 @@ const {
 const { generateCSharp } = require('../src/codegen');
 const { exportClientPipeline, resolveUnityRoot, syncUnity } = require('../src/unity-pipeline');
 const { validateAndWriteReport } = require('../src/validator');
+const { writeWorkbookAtomic } = require('../Tools/import-localization');
 
 const ROOT = path.resolve(__dirname, '..');
 
@@ -34,6 +35,11 @@ function setMetadata(sheet, name, type, keyCount) {
   sheet.getCell('B2').value = keyCount;
 }
 
+function setRequired(sheet, required) {
+  sheet.getCell('C2').value = 'Required';
+  sheet.getCell('D2').value = required;
+}
+
 async function writeSimpleBase(filePath, options = {}) {
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet('Base');
@@ -49,12 +55,13 @@ async function writeTypedNormal(filePath, options = {}) {
   const workbook = new ExcelJS.Workbook();
   const sheet = workbook.addWorksheet('Typed');
   setMetadata(sheet, options.name || 'TypedConfig', 'normal', 2);
-  sheet.getRow(4).values = ['sc', 'sc', 'c', 'sc', 'c', 's'];
-  sheet.getRow(5).values = ['itemType', 'itemId', 'itemName', 'serial', 'payload', 'serverOnly'];
-  sheet.getRow(6).values = ['int', 'int', 'string', 'long', 'json', 'string'];
-  sheet.getRow(7).values = [1, 1001, 'Sword', '9223372036854775806', '{ power: 10 }', 'secret'];
+  if (options.required !== undefined) setRequired(sheet, options.required);
+  sheet.getRow(4).values = ['sc', 'sc', 'c', 'sc', 'c', 's', 'c'];
+  sheet.getRow(5).values = ['itemType', 'itemId', 'itemName', 'serial', 'payload', 'serverOnly', 'optionalText'];
+  sheet.getRow(6).values = ['int', 'int', 'string', 'long', 'json', 'string', 'string?'];
+  sheet.getRow(7).values = [1, 1001, 'Sword', '9223372036854775806', '{ power: 10 }', 'secret', options.optionalText ?? null];
   if (options.duplicate) {
-    sheet.getRow(8).values = [1, 1001, 'Duplicate', '2', '{}', 'secret'];
+    sheet.getRow(8).values = [1, 1001, 'Duplicate', '2', '{}', 'secret', null];
   }
   if (options.missingValue) sheet.getCell('B7').value = null;
   await workbook.xlsx.writeFile(filePath);
@@ -64,12 +71,15 @@ test('current example workbooks generate one descriptor per real config table', 
   const configurations = await loadConfigurations(ROOT);
   assert.deepEqual(configurations.map((config) => config.name), [
     'GlobalBaseConfig',
-    'ItemNormalConfig'
+    'ItemNormalConfig',
+    'LocalizationTextConfig'
   ]);
   const source = generateCSharp(configurations);
   assert.match(source, /public static class GlobalBaseConfig/);
   assert.match(source, /public static int StartGold/);
   assert.match(source, /TryGet\(int itemType, int itemId, out ItemNormalConfigRow row\)/);
+  assert.match(source, /TryGet\(string tableName, string textKey, out LocalizationTextConfigRow row\)/);
+  assert.match(source, /new ConfigDescriptor\("LocalizationTextConfig", false,/);
   assert.doesNotMatch(source, /ConfigStage|StageId|EnsureLoadedAsync|ConfigLoadPolicy/);
 });
 
@@ -83,7 +93,37 @@ test('JSON and MessagePack represent the same typed client data', async (t) => {
   assert.deepEqual(decode(bytes), json);
   assert.equal(json['1']['1001'].serial, '9223372036854775806');
   assert.deepEqual(json['1']['1001'].payload, { power: 10 });
+  assert.equal(json['1']['1001'].optionalText, null);
   assert.equal(Object.hasOwn(json['1']['1001'], 'serverOnly'), false);
+});
+
+test('Required metadata and nullable strings are emitted into generated bindings', async (t) => {
+  const directory = await temporaryDirectory(t);
+  await writeTypedNormal(path.join(directory, 'Optional.xlsx'), { required: false });
+  const configurations = await loadConfigurations(directory);
+  assert.equal(configurations[0].required, false);
+  const source = generateCSharp(configurations);
+  assert.match(source, /ReadOptionalString/);
+  assert.match(source, /new ConfigDescriptor\("TypedConfig", false,/);
+});
+
+test('localization migration writes the optional normal table contract', async (t) => {
+  const directory = await temporaryDirectory(t);
+  const output = path.join(directory, 'LocalizationTextConfig.xlsx');
+  await writeWorkbookAtomic({
+    schemaVersion: 1,
+    rows: [{
+      tableName: 'Text', textKey: 'Level', smart: false,
+      en: 'Level {0}', de: null, es: 'Nivel {0}', ja: null, ko: null, pt: null
+    }]
+  }, output, false);
+
+  const configurations = await loadConfigurations(directory);
+  const config = configurations[0];
+  assert.equal(config.name, 'LocalizationTextConfig');
+  assert.equal(config.required, false);
+  assert.deepEqual(config.records[0].keys, ['Text', 'Level']);
+  assert.equal(config.records[0].values[4], null);
 });
 
 test('duplicate keys and partial rows are rejected', async (t) => {

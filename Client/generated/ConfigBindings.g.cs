@@ -127,18 +127,103 @@ namespace GameConfig
             _snapshot ?? throw new ConfigNotLoadedException("ItemNormalConfig");
     }
 
+
+    public sealed class LocalizationTextConfigRow
+    {
+        public string tableName { get; }
+        public string textKey { get; }
+        public bool smart { get; }
+        public string en { get; }
+        public string de { get; }
+        public string es { get; }
+        public string ja { get; }
+        public string ko { get; }
+        public string pt { get; }
+
+        internal LocalizationTextConfigRow(string tableName, string textKey, bool smart, string en, string de, string es, string ja, string ko, string pt)
+        {
+            this.tableName = tableName;
+            this.textKey = textKey;
+            this.smart = smart;
+            this.en = en;
+            this.de = de;
+            this.es = es;
+            this.ja = ja;
+            this.ko = ko;
+            this.pt = pt;
+        }
+    }
+
+    internal sealed class LocalizationTextConfigSnapshot
+    {
+        internal readonly Dictionary<string, LocalizationTextConfigRow> Rows;
+        internal LocalizationTextConfigSnapshot(Dictionary<string, LocalizationTextConfigRow> rows) => Rows = rows;
+    }
+
+    public static class LocalizationTextConfig
+    {
+        private static LocalizationTextConfigSnapshot _snapshot;
+        public static bool IsLoaded => _snapshot != null;
+        public static int Count => RequireSnapshot().Rows.Count;
+        public static IReadOnlyCollection<LocalizationTextConfigRow> Values => RequireSnapshot().Rows.Values;
+
+        public static bool TryGet(string tableName, string textKey, out LocalizationTextConfigRow row)
+        {
+            row = null;
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(tableName, textKey), out row);
+        }
+
+        public static LocalizationTextConfigRow Get(string tableName, string textKey)
+        {
+            if (_snapshot == null) throw new ConfigNotLoadedException("LocalizationTextConfig");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(tableName, textKey), out LocalizationTextConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 LocalizationTextConfig 不存在 Key: {ConfigKey.Display(tableName, textKey)}");
+        }
+
+        internal static object Parse(JToken root)
+        {
+            var rows = new Dictionary<string, LocalizationTextConfigRow>(StringComparer.Ordinal);
+            foreach (ConfigRowNode node in ConfigValue.EnumerateRows(root, 2, "LocalizationTextConfig"))
+            {
+                JToken[] keys = node.Keys;
+                JObject row = node.Row;
+                string key = ConfigKey.Compose(ConfigValue.ReadString(keys[0], "LocalizationTextConfig.tableName"), ConfigValue.ReadString(keys[1], "LocalizationTextConfig.textKey"));
+                var value = new LocalizationTextConfigRow(
+                    ConfigValue.ReadString(row, "tableName", "LocalizationTextConfig"),
+                    ConfigValue.ReadString(row, "textKey", "LocalizationTextConfig"),
+                    ConfigValue.ReadBoolean(row, "smart", "LocalizationTextConfig"),
+                    ConfigValue.ReadString(row, "en", "LocalizationTextConfig"),
+                    ConfigValue.ReadOptionalString(row, "de", "LocalizationTextConfig"),
+                    ConfigValue.ReadOptionalString(row, "es", "LocalizationTextConfig"),
+                    ConfigValue.ReadOptionalString(row, "ja", "LocalizationTextConfig"),
+                    ConfigValue.ReadOptionalString(row, "ko", "LocalizationTextConfig"),
+                    ConfigValue.ReadOptionalString(row, "pt", "LocalizationTextConfig"));
+                if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 LocalizationTextConfig 包含重复 Key: {key}");
+            }
+            return new LocalizationTextConfigSnapshot(rows);
+        }
+
+        internal static void Publish(object snapshot) => _snapshot = (LocalizationTextConfigSnapshot)snapshot;
+        internal static void Clear() => _snapshot = null;
+
+        private static LocalizationTextConfigSnapshot RequireSnapshot() =>
+            _snapshot ?? throw new ConfigNotLoadedException("LocalizationTextConfig");
+    }
+
     public static class GeneratedConfigCatalog
     {
         public static IReadOnlyList<string> Names { get; } = Array.AsReadOnly(new[]
         {
                 "GlobalBaseConfig",
-                "ItemNormalConfig"
+                "ItemNormalConfig",
+                "LocalizationTextConfig"
         });
 
         internal static readonly ConfigDescriptor[] Configs =
         {
-            new ConfigDescriptor("GlobalBaseConfig", "GlobalBaseConfig", GlobalBaseConfig.Parse, GlobalBaseConfig.Publish, GlobalBaseConfig.Clear),
-            new ConfigDescriptor("ItemNormalConfig", "ItemNormalConfig", ItemNormalConfig.Parse, ItemNormalConfig.Publish, ItemNormalConfig.Clear)
+            new ConfigDescriptor("GlobalBaseConfig", true, "GlobalBaseConfig", GlobalBaseConfig.Parse, GlobalBaseConfig.Publish, GlobalBaseConfig.Clear),
+            new ConfigDescriptor("ItemNormalConfig", true, "ItemNormalConfig", ItemNormalConfig.Parse, ItemNormalConfig.Publish, ItemNormalConfig.Clear),
+            new ConfigDescriptor("LocalizationTextConfig", false, "LocalizationTextConfig", LocalizationTextConfig.Parse, LocalizationTextConfig.Publish, LocalizationTextConfig.Clear)
         };
     }
 }

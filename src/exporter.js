@@ -8,7 +8,7 @@ const { encode } = require('@msgpack/msgpack');
 const { ConfigError, ConfigValidationError } = require('./errors');
 
 const TARGET_FLAGS = new Set(['c', 's', 'sc']);
-const FIELD_TYPES = new Set(['int', 'long', 'float', 'double', 'string', 'bool', 'json']);
+const FIELD_TYPES = new Set(['int', 'long', 'float', 'double', 'string', 'string?', 'bool', 'json']);
 const KEY_TYPES = new Set(['int', 'long', 'string']);
 const INT_MIN = -2147483648;
 const INT_MAX = 2147483647;
@@ -99,6 +99,23 @@ function parseTargetFlag(cell, filePath, worksheet) {
   return flag;
 }
 
+function parseRequiredFlag(worksheet, filePath) {
+  const labelCell = worksheet.getCell('C2');
+  const valueCell = worksheet.getCell('D2');
+  const label = getCellValue(labelCell, filePath, worksheet);
+  const value = getCellValue(valueCell, filePath, worksheet);
+  if (isBlank(label) && isBlank(value)) return true;
+  if (label !== 'Required') {
+    throw new ConfigError('C2 must be "Required" when optional config metadata is used.',
+      locationOf(filePath, worksheet, labelCell.address));
+  }
+  if (typeof value !== 'boolean') {
+    throw new ConfigError('Required must be an Excel boolean value.',
+      locationOf(filePath, worksheet, valueCell.address));
+  }
+  return value;
+}
+
 function isTargetIncluded(flag, target) {
   return flag === 'sc' || (target === 'client' ? flag === 'c' : flag === 's');
 }
@@ -184,6 +201,7 @@ function parseJson(value, location) {
 function parseTypedValue(cell, type, filePath, worksheet) {
   const value = getCellValue(cell, filePath, worksheet);
   const location = locationOf(filePath, worksheet, cell.address);
+  if (type === 'string?' && isBlank(value)) return null;
   if (isBlank(value)) throw new ConfigError(`${type} 字段不能为空`, location);
 
   switch (type) {
@@ -193,6 +211,9 @@ function parseTypedValue(cell, type, filePath, worksheet) {
     case 'double': return parseFloating(value, type, location);
     case 'string':
       if (typeof value !== 'string') throw new ConfigError('string 必须是文本单元格', location);
+      return value;
+    case 'string?':
+      if (typeof value !== 'string') throw new ConfigError('string? must be a text cell or empty.', location);
       return value;
     case 'bool':
       if (typeof value !== 'boolean') throw new ConfigError('bool 必须是 Excel 布尔单元格', location);
@@ -345,6 +366,7 @@ function parseWorksheet(worksheet, filePath) {
     name,
     type,
     keyCount: parsePositiveInteger(worksheet.getCell('B2'), filePath, worksheet, 'Key'),
+    required: parseRequiredFlag(worksheet, filePath),
     source: `${path.basename(filePath)} [${worksheet.name}]`
   };
   return type === 'base'

@@ -1,7 +1,10 @@
 node_modules/
+Tools/BuildEventMigrationReport.json
+Tools/BuildEventTestResults.xml
 .agents/
 .Client.staging-*/
 .Client.backup-*/
 .Server.staging-*/
 .Server.backup-*/
 Tools/ValidationReport.txt
+Tools/LocalizationExportReport.json

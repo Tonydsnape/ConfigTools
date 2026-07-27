@@ -1,0 +1,82 @@
+{
+  "1": {
+    "0": {
+      "chapterId": 1,
+      "order": 0,
+      "stageId": 0,
+      "audioName": "e_housefix_wind",
+      "invert": true
+    },
+    "1": {
+      "chapterId": 1,
+      "order": 1,
+      "stageId": 3,
+      "audioName": "e_housefix_fire_loop",
+      "invert": false
+    }
+  },
+  "2": {
+    "0": {
+      "chapterId": 2,
+      "order": 0,
+      "stageId": 0,
+      "audioName": "e_housefix_wind",
+      "invert": true
+    },
+    "1": {
+      "chapterId": 2,
+      "order": 1,
+      "stageId": 3,
+      "audioName": "e_housefix_door_rattle",
+      "invert": true
+    }
+  },
+  "3": {
+    "0": {
+      "chapterId": 3,
+      "order": 0,
+      "stageId": 0,
+      "audioName": "e_housefix_fire_danger_loop",
+      "invert": true
+    },
+    "1": {
+      "chapterId": 3,
+      "order": 1,
+      "stageId": 2,
+      "audioName": "e_housefix_wind",
+      "invert": true
+    }
+  },
+  "4": {
+    "0": {
+      "chapterId": 4,
+      "order": 0,
+      "stageId": 3,
+      "audioName": "e_housefix_wind",
+      "invert": true
+    },
+    "1": {
+      "chapterId": 4,
+      "order": 1,
+      "stageId": 6,
+      "audioName": "e_housefix_roasting",
+      "invert": false
+    },
+    "2": {
+      "chapterId": 4,
+      "order": 2,
+      "stageId": 7,
+      "audioName": "e_housefix_dog_sad",
+      "invert": true
+    }
+  },
+  "8": {
+    "0": {
+      "chapterId": 8,
+      "order": 0,
+      "stageId": 9,
+      "audioName": "e_housefix_thunderstorm",
+      "invert": true
+    }
+  }
+}

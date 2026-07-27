@@ -6,6 +6,619 @@ using Newtonsoft.Json.Linq;
 namespace GameConfig
 {
 
+    public sealed class BuildEventChapterConfigRow
+    {
+        public int chapterId { get; }
+        public string assetBundleName { get; }
+        public string spineRootPath { get; }
+        public string storyTextKey { get; }
+        public string completeTextKey { get; }
+        public string graySpritePath { get; }
+        public string unlockSpritePath { get; }
+        public string completeSpritePath { get; }
+        public string popupSpritePath { get; }
+        public string finishImagePath { get; }
+
+        internal BuildEventChapterConfigRow(int chapterId, string assetBundleName, string spineRootPath, string storyTextKey, string completeTextKey, string graySpritePath, string unlockSpritePath, string completeSpritePath, string popupSpritePath, string finishImagePath)
+        {
+            this.chapterId = chapterId;
+            this.assetBundleName = assetBundleName;
+            this.spineRootPath = spineRootPath;
+            this.storyTextKey = storyTextKey;
+            this.completeTextKey = completeTextKey;
+            this.graySpritePath = graySpritePath;
+            this.unlockSpritePath = unlockSpritePath;
+            this.completeSpritePath = completeSpritePath;
+            this.popupSpritePath = popupSpritePath;
+            this.finishImagePath = finishImagePath;
+        }
+    }
+
+    internal sealed class BuildEventChapterConfigSnapshot
+    {
+        internal readonly Dictionary<string, BuildEventChapterConfigRow> Rows;
+        internal BuildEventChapterConfigSnapshot(Dictionary<string, BuildEventChapterConfigRow> rows) => Rows = rows;
+    }
+
+    public static class BuildEventChapterConfig
+    {
+        private static BuildEventChapterConfigSnapshot _snapshot;
+        public static bool IsLoaded => _snapshot != null;
+        public static int Count => RequireSnapshot().Rows.Count;
+        public static IReadOnlyCollection<BuildEventChapterConfigRow> Values => RequireSnapshot().Rows.Values;
+
+        public static bool TryGet(int chapterId, out BuildEventChapterConfigRow row)
+        {
+            row = null;
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId), out row);
+        }
+
+        public static BuildEventChapterConfigRow Get(int chapterId)
+        {
+            if (_snapshot == null) throw new ConfigNotLoadedException("BuildEventChapterConfig");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId), out BuildEventChapterConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 BuildEventChapterConfig 不存在 Key: {ConfigKey.Display(chapterId)}");
+        }
+
+        internal static object Parse(JToken root)
+        {
+            var rows = new Dictionary<string, BuildEventChapterConfigRow>(StringComparer.Ordinal);
+            foreach (ConfigRowNode node in ConfigValue.EnumerateRows(root, 1, "BuildEventChapterConfig"))
+            {
+                JToken[] keys = node.Keys;
+                JObject row = node.Row;
+                string key = ConfigKey.Compose(ConfigValue.ReadInt32(keys[0], "BuildEventChapterConfig.chapterId"));
+                var value = new BuildEventChapterConfigRow(
+                    ConfigValue.ReadInt32(row, "chapterId", "BuildEventChapterConfig"),
+                    ConfigValue.ReadString(row, "assetBundleName", "BuildEventChapterConfig"),
+                    ConfigValue.ReadString(row, "spineRootPath", "BuildEventChapterConfig"),
+                    ConfigValue.ReadString(row, "storyTextKey", "BuildEventChapterConfig"),
+                    ConfigValue.ReadString(row, "completeTextKey", "BuildEventChapterConfig"),
+                    ConfigValue.ReadString(row, "graySpritePath", "BuildEventChapterConfig"),
+                    ConfigValue.ReadString(row, "unlockSpritePath", "BuildEventChapterConfig"),
+                    ConfigValue.ReadString(row, "completeSpritePath", "BuildEventChapterConfig"),
+                    ConfigValue.ReadString(row, "popupSpritePath", "BuildEventChapterConfig"),
+                    ConfigValue.ReadString(row, "finishImagePath", "BuildEventChapterConfig"));
+                if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 BuildEventChapterConfig 包含重复 Key: {key}");
+            }
+            return new BuildEventChapterConfigSnapshot(rows);
+        }
+
+        internal static void Publish(object snapshot) => _snapshot = (BuildEventChapterConfigSnapshot)snapshot;
+        internal static void Clear() => _snapshot = null;
+
+        private static BuildEventChapterConfigSnapshot RequireSnapshot() =>
+            _snapshot ?? throw new ConfigNotLoadedException("BuildEventChapterConfig");
+    }
+
+
+    public sealed class BuildEventStageConfigRow
+    {
+        public int chapterId { get; }
+        public int stageId { get; }
+        public string iconPath { get; }
+        public float iconX { get; }
+        public float iconY { get; }
+        public float iconZ { get; }
+        public int buildCost { get; }
+        public int textId { get; }
+        public string finishAudioName { get; }
+
+        internal BuildEventStageConfigRow(int chapterId, int stageId, string iconPath, float iconX, float iconY, float iconZ, int buildCost, int textId, string finishAudioName)
+        {
+            this.chapterId = chapterId;
+            this.stageId = stageId;
+            this.iconPath = iconPath;
+            this.iconX = iconX;
+            this.iconY = iconY;
+            this.iconZ = iconZ;
+            this.buildCost = buildCost;
+            this.textId = textId;
+            this.finishAudioName = finishAudioName;
+        }
+    }
+
+    internal sealed class BuildEventStageConfigSnapshot
+    {
+        internal readonly Dictionary<string, BuildEventStageConfigRow> Rows;
+        internal BuildEventStageConfigSnapshot(Dictionary<string, BuildEventStageConfigRow> rows) => Rows = rows;
+    }
+
+    public static class BuildEventStageConfig
+    {
+        private static BuildEventStageConfigSnapshot _snapshot;
+        public static bool IsLoaded => _snapshot != null;
+        public static int Count => RequireSnapshot().Rows.Count;
+        public static IReadOnlyCollection<BuildEventStageConfigRow> Values => RequireSnapshot().Rows.Values;
+
+        public static bool TryGet(int chapterId, int stageId, out BuildEventStageConfigRow row)
+        {
+            row = null;
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, stageId), out row);
+        }
+
+        public static BuildEventStageConfigRow Get(int chapterId, int stageId)
+        {
+            if (_snapshot == null) throw new ConfigNotLoadedException("BuildEventStageConfig");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, stageId), out BuildEventStageConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 BuildEventStageConfig 不存在 Key: {ConfigKey.Display(chapterId, stageId)}");
+        }
+
+        internal static object Parse(JToken root)
+        {
+            var rows = new Dictionary<string, BuildEventStageConfigRow>(StringComparer.Ordinal);
+            foreach (ConfigRowNode node in ConfigValue.EnumerateRows(root, 2, "BuildEventStageConfig"))
+            {
+                JToken[] keys = node.Keys;
+                JObject row = node.Row;
+                string key = ConfigKey.Compose(ConfigValue.ReadInt32(keys[0], "BuildEventStageConfig.chapterId"), ConfigValue.ReadInt32(keys[1], "BuildEventStageConfig.stageId"));
+                var value = new BuildEventStageConfigRow(
+                    ConfigValue.ReadInt32(row, "chapterId", "BuildEventStageConfig"),
+                    ConfigValue.ReadInt32(row, "stageId", "BuildEventStageConfig"),
+                    ConfigValue.ReadString(row, "iconPath", "BuildEventStageConfig"),
+                    ConfigValue.ReadSingle(row, "iconX", "BuildEventStageConfig"),
+                    ConfigValue.ReadSingle(row, "iconY", "BuildEventStageConfig"),
+                    ConfigValue.ReadSingle(row, "iconZ", "BuildEventStageConfig"),
+                    ConfigValue.ReadInt32(row, "buildCost", "BuildEventStageConfig"),
+                    ConfigValue.ReadInt32(row, "textId", "BuildEventStageConfig"),
+                    ConfigValue.ReadString(row, "finishAudioName", "BuildEventStageConfig"));
+                if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 BuildEventStageConfig 包含重复 Key: {key}");
+            }
+            return new BuildEventStageConfigSnapshot(rows);
+        }
+
+        internal static void Publish(object snapshot) => _snapshot = (BuildEventStageConfigSnapshot)snapshot;
+        internal static void Clear() => _snapshot = null;
+
+        private static BuildEventStageConfigSnapshot RequireSnapshot() =>
+            _snapshot ?? throw new ConfigNotLoadedException("BuildEventStageConfig");
+    }
+
+
+    public sealed class BuildEventStageDependencyConfigRow
+    {
+        public int chapterId { get; }
+        public int stageId { get; }
+        public int order { get; }
+        public int requiredStageId { get; }
+
+        internal BuildEventStageDependencyConfigRow(int chapterId, int stageId, int order, int requiredStageId)
+        {
+            this.chapterId = chapterId;
+            this.stageId = stageId;
+            this.order = order;
+            this.requiredStageId = requiredStageId;
+        }
+    }
+
+    internal sealed class BuildEventStageDependencyConfigSnapshot
+    {
+        internal readonly Dictionary<string, BuildEventStageDependencyConfigRow> Rows;
+        internal BuildEventStageDependencyConfigSnapshot(Dictionary<string, BuildEventStageDependencyConfigRow> rows) => Rows = rows;
+    }
+
+    public static class BuildEventStageDependencyConfig
+    {
+        private static BuildEventStageDependencyConfigSnapshot _snapshot;
+        public static bool IsLoaded => _snapshot != null;
+        public static int Count => RequireSnapshot().Rows.Count;
+        public static IReadOnlyCollection<BuildEventStageDependencyConfigRow> Values => RequireSnapshot().Rows.Values;
+
+        public static bool TryGet(int chapterId, int stageId, int order, out BuildEventStageDependencyConfigRow row)
+        {
+            row = null;
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, stageId, order), out row);
+        }
+
+        public static BuildEventStageDependencyConfigRow Get(int chapterId, int stageId, int order)
+        {
+            if (_snapshot == null) throw new ConfigNotLoadedException("BuildEventStageDependencyConfig");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, stageId, order), out BuildEventStageDependencyConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 BuildEventStageDependencyConfig 不存在 Key: {ConfigKey.Display(chapterId, stageId, order)}");
+        }
+
+        internal static object Parse(JToken root)
+        {
+            var rows = new Dictionary<string, BuildEventStageDependencyConfigRow>(StringComparer.Ordinal);
+            foreach (ConfigRowNode node in ConfigValue.EnumerateRows(root, 3, "BuildEventStageDependencyConfig"))
+            {
+                JToken[] keys = node.Keys;
+                JObject row = node.Row;
+                string key = ConfigKey.Compose(ConfigValue.ReadInt32(keys[0], "BuildEventStageDependencyConfig.chapterId"), ConfigValue.ReadInt32(keys[1], "BuildEventStageDependencyConfig.stageId"), ConfigValue.ReadInt32(keys[2], "BuildEventStageDependencyConfig.order"));
+                var value = new BuildEventStageDependencyConfigRow(
+                    ConfigValue.ReadInt32(row, "chapterId", "BuildEventStageDependencyConfig"),
+                    ConfigValue.ReadInt32(row, "stageId", "BuildEventStageDependencyConfig"),
+                    ConfigValue.ReadInt32(row, "order", "BuildEventStageDependencyConfig"),
+                    ConfigValue.ReadInt32(row, "requiredStageId", "BuildEventStageDependencyConfig"));
+                if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 BuildEventStageDependencyConfig 包含重复 Key: {key}");
+            }
+            return new BuildEventStageDependencyConfigSnapshot(rows);
+        }
+
+        internal static void Publish(object snapshot) => _snapshot = (BuildEventStageDependencyConfigSnapshot)snapshot;
+        internal static void Clear() => _snapshot = null;
+
+        private static BuildEventStageDependencyConfigSnapshot RequireSnapshot() =>
+            _snapshot ?? throw new ConfigNotLoadedException("BuildEventStageDependencyConfig");
+    }
+
+
+    public sealed class BuildEventStageSpineConfigRow
+    {
+        public int chapterId { get; }
+        public int stageId { get; }
+        public int order { get; }
+        public string spineName { get; }
+
+        internal BuildEventStageSpineConfigRow(int chapterId, int stageId, int order, string spineName)
+        {
+            this.chapterId = chapterId;
+            this.stageId = stageId;
+            this.order = order;
+            this.spineName = spineName;
+        }
+    }
+
+    internal sealed class BuildEventStageSpineConfigSnapshot
+    {
+        internal readonly Dictionary<string, BuildEventStageSpineConfigRow> Rows;
+        internal BuildEventStageSpineConfigSnapshot(Dictionary<string, BuildEventStageSpineConfigRow> rows) => Rows = rows;
+    }
+
+    public static class BuildEventStageSpineConfig
+    {
+        private static BuildEventStageSpineConfigSnapshot _snapshot;
+        public static bool IsLoaded => _snapshot != null;
+        public static int Count => RequireSnapshot().Rows.Count;
+        public static IReadOnlyCollection<BuildEventStageSpineConfigRow> Values => RequireSnapshot().Rows.Values;
+
+        public static bool TryGet(int chapterId, int stageId, int order, out BuildEventStageSpineConfigRow row)
+        {
+            row = null;
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, stageId, order), out row);
+        }
+
+        public static BuildEventStageSpineConfigRow Get(int chapterId, int stageId, int order)
+        {
+            if (_snapshot == null) throw new ConfigNotLoadedException("BuildEventStageSpineConfig");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, stageId, order), out BuildEventStageSpineConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 BuildEventStageSpineConfig 不存在 Key: {ConfigKey.Display(chapterId, stageId, order)}");
+        }
+
+        internal static object Parse(JToken root)
+        {
+            var rows = new Dictionary<string, BuildEventStageSpineConfigRow>(StringComparer.Ordinal);
+            foreach (ConfigRowNode node in ConfigValue.EnumerateRows(root, 3, "BuildEventStageSpineConfig"))
+            {
+                JToken[] keys = node.Keys;
+                JObject row = node.Row;
+                string key = ConfigKey.Compose(ConfigValue.ReadInt32(keys[0], "BuildEventStageSpineConfig.chapterId"), ConfigValue.ReadInt32(keys[1], "BuildEventStageSpineConfig.stageId"), ConfigValue.ReadInt32(keys[2], "BuildEventStageSpineConfig.order"));
+                var value = new BuildEventStageSpineConfigRow(
+                    ConfigValue.ReadInt32(row, "chapterId", "BuildEventStageSpineConfig"),
+                    ConfigValue.ReadInt32(row, "stageId", "BuildEventStageSpineConfig"),
+                    ConfigValue.ReadInt32(row, "order", "BuildEventStageSpineConfig"),
+                    ConfigValue.ReadString(row, "spineName", "BuildEventStageSpineConfig"));
+                if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 BuildEventStageSpineConfig 包含重复 Key: {key}");
+            }
+            return new BuildEventStageSpineConfigSnapshot(rows);
+        }
+
+        internal static void Publish(object snapshot) => _snapshot = (BuildEventStageSpineConfigSnapshot)snapshot;
+        internal static void Clear() => _snapshot = null;
+
+        private static BuildEventStageSpineConfigSnapshot RequireSnapshot() =>
+            _snapshot ?? throw new ConfigNotLoadedException("BuildEventStageSpineConfig");
+    }
+
+
+    public sealed class BuildEventStageEffectConfigRow
+    {
+        public int chapterId { get; }
+        public int stageId { get; }
+        public int order { get; }
+        public float x { get; }
+        public float y { get; }
+        public float z { get; }
+
+        internal BuildEventStageEffectConfigRow(int chapterId, int stageId, int order, float x, float y, float z)
+        {
+            this.chapterId = chapterId;
+            this.stageId = stageId;
+            this.order = order;
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+    }
+
+    internal sealed class BuildEventStageEffectConfigSnapshot
+    {
+        internal readonly Dictionary<string, BuildEventStageEffectConfigRow> Rows;
+        internal BuildEventStageEffectConfigSnapshot(Dictionary<string, BuildEventStageEffectConfigRow> rows) => Rows = rows;
+    }
+
+    public static class BuildEventStageEffectConfig
+    {
+        private static BuildEventStageEffectConfigSnapshot _snapshot;
+        public static bool IsLoaded => _snapshot != null;
+        public static int Count => RequireSnapshot().Rows.Count;
+        public static IReadOnlyCollection<BuildEventStageEffectConfigRow> Values => RequireSnapshot().Rows.Values;
+
+        public static bool TryGet(int chapterId, int stageId, int order, out BuildEventStageEffectConfigRow row)
+        {
+            row = null;
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, stageId, order), out row);
+        }
+
+        public static BuildEventStageEffectConfigRow Get(int chapterId, int stageId, int order)
+        {
+            if (_snapshot == null) throw new ConfigNotLoadedException("BuildEventStageEffectConfig");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, stageId, order), out BuildEventStageEffectConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 BuildEventStageEffectConfig 不存在 Key: {ConfigKey.Display(chapterId, stageId, order)}");
+        }
+
+        internal static object Parse(JToken root)
+        {
+            var rows = new Dictionary<string, BuildEventStageEffectConfigRow>(StringComparer.Ordinal);
+            foreach (ConfigRowNode node in ConfigValue.EnumerateRows(root, 3, "BuildEventStageEffectConfig"))
+            {
+                JToken[] keys = node.Keys;
+                JObject row = node.Row;
+                string key = ConfigKey.Compose(ConfigValue.ReadInt32(keys[0], "BuildEventStageEffectConfig.chapterId"), ConfigValue.ReadInt32(keys[1], "BuildEventStageEffectConfig.stageId"), ConfigValue.ReadInt32(keys[2], "BuildEventStageEffectConfig.order"));
+                var value = new BuildEventStageEffectConfigRow(
+                    ConfigValue.ReadInt32(row, "chapterId", "BuildEventStageEffectConfig"),
+                    ConfigValue.ReadInt32(row, "stageId", "BuildEventStageEffectConfig"),
+                    ConfigValue.ReadInt32(row, "order", "BuildEventStageEffectConfig"),
+                    ConfigValue.ReadSingle(row, "x", "BuildEventStageEffectConfig"),
+                    ConfigValue.ReadSingle(row, "y", "BuildEventStageEffectConfig"),
+                    ConfigValue.ReadSingle(row, "z", "BuildEventStageEffectConfig"));
+                if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 BuildEventStageEffectConfig 包含重复 Key: {key}");
+            }
+            return new BuildEventStageEffectConfigSnapshot(rows);
+        }
+
+        internal static void Publish(object snapshot) => _snapshot = (BuildEventStageEffectConfigSnapshot)snapshot;
+        internal static void Clear() => _snapshot = null;
+
+        private static BuildEventStageEffectConfigSnapshot RequireSnapshot() =>
+            _snapshot ?? throw new ConfigNotLoadedException("BuildEventStageEffectConfig");
+    }
+
+
+    public sealed class BuildEventSpineConfigRow
+    {
+        public int chapterId { get; }
+        public string spineName { get; }
+        public int sortOrder { get; }
+        public string spineType { get; }
+        public string skeletonAssetPath { get; }
+        public string animationName { get; }
+        public string idleAnimationName { get; }
+        public string finishAnimationName { get; }
+        public string overridePrefabPath { get; }
+        public bool eventCheck { get; }
+        public int hideStage { get; }
+
+        internal BuildEventSpineConfigRow(int chapterId, string spineName, int sortOrder, string spineType, string skeletonAssetPath, string animationName, string idleAnimationName, string finishAnimationName, string overridePrefabPath, bool eventCheck, int hideStage)
+        {
+            this.chapterId = chapterId;
+            this.spineName = spineName;
+            this.sortOrder = sortOrder;
+            this.spineType = spineType;
+            this.skeletonAssetPath = skeletonAssetPath;
+            this.animationName = animationName;
+            this.idleAnimationName = idleAnimationName;
+            this.finishAnimationName = finishAnimationName;
+            this.overridePrefabPath = overridePrefabPath;
+            this.eventCheck = eventCheck;
+            this.hideStage = hideStage;
+        }
+    }
+
+    internal sealed class BuildEventSpineConfigSnapshot
+    {
+        internal readonly Dictionary<string, BuildEventSpineConfigRow> Rows;
+        internal BuildEventSpineConfigSnapshot(Dictionary<string, BuildEventSpineConfigRow> rows) => Rows = rows;
+    }
+
+    public static class BuildEventSpineConfig
+    {
+        private static BuildEventSpineConfigSnapshot _snapshot;
+        public static bool IsLoaded => _snapshot != null;
+        public static int Count => RequireSnapshot().Rows.Count;
+        public static IReadOnlyCollection<BuildEventSpineConfigRow> Values => RequireSnapshot().Rows.Values;
+
+        public static bool TryGet(int chapterId, string spineName, out BuildEventSpineConfigRow row)
+        {
+            row = null;
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, spineName), out row);
+        }
+
+        public static BuildEventSpineConfigRow Get(int chapterId, string spineName)
+        {
+            if (_snapshot == null) throw new ConfigNotLoadedException("BuildEventSpineConfig");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, spineName), out BuildEventSpineConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 BuildEventSpineConfig 不存在 Key: {ConfigKey.Display(chapterId, spineName)}");
+        }
+
+        internal static object Parse(JToken root)
+        {
+            var rows = new Dictionary<string, BuildEventSpineConfigRow>(StringComparer.Ordinal);
+            foreach (ConfigRowNode node in ConfigValue.EnumerateRows(root, 2, "BuildEventSpineConfig"))
+            {
+                JToken[] keys = node.Keys;
+                JObject row = node.Row;
+                string key = ConfigKey.Compose(ConfigValue.ReadInt32(keys[0], "BuildEventSpineConfig.chapterId"), ConfigValue.ReadString(keys[1], "BuildEventSpineConfig.spineName"));
+                var value = new BuildEventSpineConfigRow(
+                    ConfigValue.ReadInt32(row, "chapterId", "BuildEventSpineConfig"),
+                    ConfigValue.ReadString(row, "spineName", "BuildEventSpineConfig"),
+                    ConfigValue.ReadInt32(row, "sortOrder", "BuildEventSpineConfig"),
+                    ConfigValue.ReadString(row, "spineType", "BuildEventSpineConfig"),
+                    ConfigValue.ReadString(row, "skeletonAssetPath", "BuildEventSpineConfig"),
+                    ConfigValue.ReadString(row, "animationName", "BuildEventSpineConfig"),
+                    ConfigValue.ReadString(row, "idleAnimationName", "BuildEventSpineConfig"),
+                    ConfigValue.ReadString(row, "finishAnimationName", "BuildEventSpineConfig"),
+                    ConfigValue.ReadString(row, "overridePrefabPath", "BuildEventSpineConfig"),
+                    ConfigValue.ReadBoolean(row, "eventCheck", "BuildEventSpineConfig"),
+                    ConfigValue.ReadInt32(row, "hideStage", "BuildEventSpineConfig"));
+                if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 BuildEventSpineConfig 包含重复 Key: {key}");
+            }
+            return new BuildEventSpineConfigSnapshot(rows);
+        }
+
+        internal static void Publish(object snapshot) => _snapshot = (BuildEventSpineConfigSnapshot)snapshot;
+        internal static void Clear() => _snapshot = null;
+
+        private static BuildEventSpineConfigSnapshot RequireSnapshot() =>
+            _snapshot ?? throw new ConfigNotLoadedException("BuildEventSpineConfig");
+    }
+
+
+    public sealed class BuildEventDialogueConfigRow
+    {
+        public int chapterId { get; }
+        public string triggerType { get; }
+        public int stageId { get; }
+        public int lineIndex { get; }
+        public string textKey { get; }
+        public int characterId { get; }
+
+        internal BuildEventDialogueConfigRow(int chapterId, string triggerType, int stageId, int lineIndex, string textKey, int characterId)
+        {
+            this.chapterId = chapterId;
+            this.triggerType = triggerType;
+            this.stageId = stageId;
+            this.lineIndex = lineIndex;
+            this.textKey = textKey;
+            this.characterId = characterId;
+        }
+    }
+
+    internal sealed class BuildEventDialogueConfigSnapshot
+    {
+        internal readonly Dictionary<string, BuildEventDialogueConfigRow> Rows;
+        internal BuildEventDialogueConfigSnapshot(Dictionary<string, BuildEventDialogueConfigRow> rows) => Rows = rows;
+    }
+
+    public static class BuildEventDialogueConfig
+    {
+        private static BuildEventDialogueConfigSnapshot _snapshot;
+        public static bool IsLoaded => _snapshot != null;
+        public static int Count => RequireSnapshot().Rows.Count;
+        public static IReadOnlyCollection<BuildEventDialogueConfigRow> Values => RequireSnapshot().Rows.Values;
+
+        public static bool TryGet(int chapterId, string triggerType, int stageId, int lineIndex, out BuildEventDialogueConfigRow row)
+        {
+            row = null;
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, triggerType, stageId, lineIndex), out row);
+        }
+
+        public static BuildEventDialogueConfigRow Get(int chapterId, string triggerType, int stageId, int lineIndex)
+        {
+            if (_snapshot == null) throw new ConfigNotLoadedException("BuildEventDialogueConfig");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, triggerType, stageId, lineIndex), out BuildEventDialogueConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 BuildEventDialogueConfig 不存在 Key: {ConfigKey.Display(chapterId, triggerType, stageId, lineIndex)}");
+        }
+
+        internal static object Parse(JToken root)
+        {
+            var rows = new Dictionary<string, BuildEventDialogueConfigRow>(StringComparer.Ordinal);
+            foreach (ConfigRowNode node in ConfigValue.EnumerateRows(root, 4, "BuildEventDialogueConfig"))
+            {
+                JToken[] keys = node.Keys;
+                JObject row = node.Row;
+                string key = ConfigKey.Compose(ConfigValue.ReadInt32(keys[0], "BuildEventDialogueConfig.chapterId"), ConfigValue.ReadString(keys[1], "BuildEventDialogueConfig.triggerType"), ConfigValue.ReadInt32(keys[2], "BuildEventDialogueConfig.stageId"), ConfigValue.ReadInt32(keys[3], "BuildEventDialogueConfig.lineIndex"));
+                var value = new BuildEventDialogueConfigRow(
+                    ConfigValue.ReadInt32(row, "chapterId", "BuildEventDialogueConfig"),
+                    ConfigValue.ReadString(row, "triggerType", "BuildEventDialogueConfig"),
+                    ConfigValue.ReadInt32(row, "stageId", "BuildEventDialogueConfig"),
+                    ConfigValue.ReadInt32(row, "lineIndex", "BuildEventDialogueConfig"),
+                    ConfigValue.ReadString(row, "textKey", "BuildEventDialogueConfig"),
+                    ConfigValue.ReadInt32(row, "characterId", "BuildEventDialogueConfig"));
+                if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 BuildEventDialogueConfig 包含重复 Key: {key}");
+            }
+            return new BuildEventDialogueConfigSnapshot(rows);
+        }
+
+        internal static void Publish(object snapshot) => _snapshot = (BuildEventDialogueConfigSnapshot)snapshot;
+        internal static void Clear() => _snapshot = null;
+
+        private static BuildEventDialogueConfigSnapshot RequireSnapshot() =>
+            _snapshot ?? throw new ConfigNotLoadedException("BuildEventDialogueConfig");
+    }
+
+
+    public sealed class BuildEventAudioConfigRow
+    {
+        public int chapterId { get; }
+        public int order { get; }
+        public int stageId { get; }
+        public string audioName { get; }
+        public bool invert { get; }
+
+        internal BuildEventAudioConfigRow(int chapterId, int order, int stageId, string audioName, bool invert)
+        {
+            this.chapterId = chapterId;
+            this.order = order;
+            this.stageId = stageId;
+            this.audioName = audioName;
+            this.invert = invert;
+        }
+    }
+
+    internal sealed class BuildEventAudioConfigSnapshot
+    {
+        internal readonly Dictionary<string, BuildEventAudioConfigRow> Rows;
+        internal BuildEventAudioConfigSnapshot(Dictionary<string, BuildEventAudioConfigRow> rows) => Rows = rows;
+    }
+
+    public static class BuildEventAudioConfig
+    {
+        private static BuildEventAudioConfigSnapshot _snapshot;
+        public static bool IsLoaded => _snapshot != null;
+        public static int Count => RequireSnapshot().Rows.Count;
+        public static IReadOnlyCollection<BuildEventAudioConfigRow> Values => RequireSnapshot().Rows.Values;
+
+        public static bool TryGet(int chapterId, int order, out BuildEventAudioConfigRow row)
+        {
+            row = null;
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, order), out row);
+        }
+
+        public static BuildEventAudioConfigRow Get(int chapterId, int order)
+        {
+            if (_snapshot == null) throw new ConfigNotLoadedException("BuildEventAudioConfig");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(chapterId, order), out BuildEventAudioConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 BuildEventAudioConfig 不存在 Key: {ConfigKey.Display(chapterId, order)}");
+        }
+
+        internal static object Parse(JToken root)
+        {
+            var rows = new Dictionary<string, BuildEventAudioConfigRow>(StringComparer.Ordinal);
+            foreach (ConfigRowNode node in ConfigValue.EnumerateRows(root, 2, "BuildEventAudioConfig"))
+            {
+                JToken[] keys = node.Keys;
+                JObject row = node.Row;
+                string key = ConfigKey.Compose(ConfigValue.ReadInt32(keys[0], "BuildEventAudioConfig.chapterId"), ConfigValue.ReadInt32(keys[1], "BuildEventAudioConfig.order"));
+                var value = new BuildEventAudioConfigRow(
+                    ConfigValue.ReadInt32(row, "chapterId", "BuildEventAudioConfig"),
+                    ConfigValue.ReadInt32(row, "order", "BuildEventAudioConfig"),
+                    ConfigValue.ReadInt32(row, "stageId", "BuildEventAudioConfig"),
+                    ConfigValue.ReadString(row, "audioName", "BuildEventAudioConfig"),
+                    ConfigValue.ReadBoolean(row, "invert", "BuildEventAudioConfig"));
+                if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 BuildEventAudioConfig 包含重复 Key: {key}");
+            }
+            return new BuildEventAudioConfigSnapshot(rows);
+        }
+
+        internal static void Publish(object snapshot) => _snapshot = (BuildEventAudioConfigSnapshot)snapshot;
+        internal static void Clear() => _snapshot = null;
+
+        private static BuildEventAudioConfigSnapshot RequireSnapshot() =>
+            _snapshot ?? throw new ConfigNotLoadedException("BuildEventAudioConfig");
+    }
+
+
     public sealed class GlobalBaseConfigSnapshot
     {
         public int ConfigKey { get; }
@@ -131,26 +744,28 @@ namespace GameConfig
     public sealed class LocalizationTextConfigRow
     {
         public string tableName { get; }
-        public string textKey { get; }
-        public bool smart { get; }
+        public string key { get; }
+        public long keyId { get; }
+        public bool isSmart { get; }
         public string en { get; }
         public string de { get; }
         public string es { get; }
+        public string pt { get; }
         public string ja { get; }
         public string ko { get; }
-        public string pt { get; }
 
-        internal LocalizationTextConfigRow(string tableName, string textKey, bool smart, string en, string de, string es, string ja, string ko, string pt)
+        internal LocalizationTextConfigRow(string tableName, string key, long keyId, bool isSmart, string en, string de, string es, string pt, string ja, string ko)
         {
             this.tableName = tableName;
-            this.textKey = textKey;
-            this.smart = smart;
+            this.key = key;
+            this.keyId = keyId;
+            this.isSmart = isSmart;
             this.en = en;
             this.de = de;
             this.es = es;
+            this.pt = pt;
             this.ja = ja;
             this.ko = ko;
-            this.pt = pt;
         }
     }
 
@@ -167,17 +782,17 @@ namespace GameConfig
         public static int Count => RequireSnapshot().Rows.Count;
         public static IReadOnlyCollection<LocalizationTextConfigRow> Values => RequireSnapshot().Rows.Values;
 
-        public static bool TryGet(string tableName, string textKey, out LocalizationTextConfigRow row)
+        public static bool TryGet(string tableName, string key, out LocalizationTextConfigRow row)
         {
             row = null;
-            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(tableName, textKey), out row);
+            return _snapshot != null && _snapshot.Rows.TryGetValue(ConfigKey.Compose(tableName, key), out row);
         }
 
-        public static LocalizationTextConfigRow Get(string tableName, string textKey)
+        public static LocalizationTextConfigRow Get(string tableName, string key)
         {
             if (_snapshot == null) throw new ConfigNotLoadedException("LocalizationTextConfig");
-            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(tableName, textKey), out LocalizationTextConfigRow row)) return row;
-            throw new KeyNotFoundException($"配置 LocalizationTextConfig 不存在 Key: {ConfigKey.Display(tableName, textKey)}");
+            if (_snapshot.Rows.TryGetValue(ConfigKey.Compose(tableName, key), out LocalizationTextConfigRow row)) return row;
+            throw new KeyNotFoundException($"配置 LocalizationTextConfig 不存在 Key: {ConfigKey.Display(tableName, key)}");
         }
 
         internal static object Parse(JToken root)
@@ -187,17 +802,18 @@ namespace GameConfig
             {
                 JToken[] keys = node.Keys;
                 JObject row = node.Row;
-                string key = ConfigKey.Compose(ConfigValue.ReadString(keys[0], "LocalizationTextConfig.tableName"), ConfigValue.ReadString(keys[1], "LocalizationTextConfig.textKey"));
+                string key = ConfigKey.Compose(ConfigValue.ReadString(keys[0], "LocalizationTextConfig.tableName"), ConfigValue.ReadString(keys[1], "LocalizationTextConfig.key"));
                 var value = new LocalizationTextConfigRow(
                     ConfigValue.ReadString(row, "tableName", "LocalizationTextConfig"),
-                    ConfigValue.ReadString(row, "textKey", "LocalizationTextConfig"),
-                    ConfigValue.ReadBoolean(row, "smart", "LocalizationTextConfig"),
+                    ConfigValue.ReadString(row, "key", "LocalizationTextConfig"),
+                    ConfigValue.ReadInt64(row, "keyId", "LocalizationTextConfig"),
+                    ConfigValue.ReadBoolean(row, "isSmart", "LocalizationTextConfig"),
                     ConfigValue.ReadString(row, "en", "LocalizationTextConfig"),
-                    ConfigValue.ReadOptionalString(row, "de", "LocalizationTextConfig"),
-                    ConfigValue.ReadOptionalString(row, "es", "LocalizationTextConfig"),
-                    ConfigValue.ReadOptionalString(row, "ja", "LocalizationTextConfig"),
-                    ConfigValue.ReadOptionalString(row, "ko", "LocalizationTextConfig"),
-                    ConfigValue.ReadOptionalString(row, "pt", "LocalizationTextConfig"));
+                    ConfigValue.ReadString(row, "de", "LocalizationTextConfig"),
+                    ConfigValue.ReadString(row, "es", "LocalizationTextConfig"),
+                    ConfigValue.ReadString(row, "pt", "LocalizationTextConfig"),
+                    ConfigValue.ReadString(row, "ja", "LocalizationTextConfig"),
+                    ConfigValue.ReadString(row, "ko", "LocalizationTextConfig"));
                 if (!rows.TryAdd(key, value)) throw new ConfigDataException($"配置 LocalizationTextConfig 包含重复 Key: {key}");
             }
             return new LocalizationTextConfigSnapshot(rows);
@@ -214,6 +830,14 @@ namespace GameConfig
     {
         public static IReadOnlyList<string> Names { get; } = Array.AsReadOnly(new[]
         {
+                "BuildEventChapterConfig",
+                "BuildEventStageConfig",
+                "BuildEventStageDependencyConfig",
+                "BuildEventStageSpineConfig",
+                "BuildEventStageEffectConfig",
+                "BuildEventSpineConfig",
+                "BuildEventDialogueConfig",
+                "BuildEventAudioConfig",
                 "GlobalBaseConfig",
                 "ItemNormalConfig",
                 "LocalizationTextConfig"
@@ -221,6 +845,14 @@ namespace GameConfig
 
         internal static readonly ConfigDescriptor[] Configs =
         {
+            new ConfigDescriptor("BuildEventChapterConfig", true, "BuildEventChapterConfig", BuildEventChapterConfig.Parse, BuildEventChapterConfig.Publish, BuildEventChapterConfig.Clear),
+            new ConfigDescriptor("BuildEventStageConfig", true, "BuildEventStageConfig", BuildEventStageConfig.Parse, BuildEventStageConfig.Publish, BuildEventStageConfig.Clear),
+            new ConfigDescriptor("BuildEventStageDependencyConfig", true, "BuildEventStageDependencyConfig", BuildEventStageDependencyConfig.Parse, BuildEventStageDependencyConfig.Publish, BuildEventStageDependencyConfig.Clear),
+            new ConfigDescriptor("BuildEventStageSpineConfig", true, "BuildEventStageSpineConfig", BuildEventStageSpineConfig.Parse, BuildEventStageSpineConfig.Publish, BuildEventStageSpineConfig.Clear),
+            new ConfigDescriptor("BuildEventStageEffectConfig", true, "BuildEventStageEffectConfig", BuildEventStageEffectConfig.Parse, BuildEventStageEffectConfig.Publish, BuildEventStageEffectConfig.Clear),
+            new ConfigDescriptor("BuildEventSpineConfig", true, "BuildEventSpineConfig", BuildEventSpineConfig.Parse, BuildEventSpineConfig.Publish, BuildEventSpineConfig.Clear),
+            new ConfigDescriptor("BuildEventDialogueConfig", true, "BuildEventDialogueConfig", BuildEventDialogueConfig.Parse, BuildEventDialogueConfig.Publish, BuildEventDialogueConfig.Clear),
+            new ConfigDescriptor("BuildEventAudioConfig", true, "BuildEventAudioConfig", BuildEventAudioConfig.Parse, BuildEventAudioConfig.Publish, BuildEventAudioConfig.Clear),
             new ConfigDescriptor("GlobalBaseConfig", true, "GlobalBaseConfig", GlobalBaseConfig.Parse, GlobalBaseConfig.Publish, GlobalBaseConfig.Clear),
             new ConfigDescriptor("ItemNormalConfig", true, "ItemNormalConfig", ItemNormalConfig.Parse, ItemNormalConfig.Publish, ItemNormalConfig.Clear),
             new ConfigDescriptor("LocalizationTextConfig", false, "LocalizationTextConfig", LocalizationTextConfig.Parse, LocalizationTextConfig.Publish, LocalizationTextConfig.Clear)

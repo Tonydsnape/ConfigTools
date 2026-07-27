@@ -1,0 +1,898 @@
+{
+  "1": {
+    "finish": {
+      "3": {
+        "0": {
+          "chapterId": 1,
+          "triggerType": "finish",
+          "stageId": 3,
+          "lineIndex": 0,
+          "textKey": "1_2_1",
+          "characterId": 1
+        },
+        "1": {
+          "chapterId": 1,
+          "triggerType": "finish",
+          "stageId": 3,
+          "lineIndex": 1,
+          "textKey": "1_2_2",
+          "characterId": 1
+        },
+        "2": {
+          "chapterId": 1,
+          "triggerType": "finish",
+          "stageId": 3,
+          "lineIndex": 2,
+          "textKey": "1_2_3",
+          "characterId": 1
+        }
+      },
+      "8": {
+        "0": {
+          "chapterId": 1,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 0,
+          "textKey": "1_3_1",
+          "characterId": 2
+        },
+        "1": {
+          "chapterId": 1,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 1,
+          "textKey": "1_3_2",
+          "characterId": 2
+        },
+        "2": {
+          "chapterId": 1,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 2,
+          "textKey": "1_3_3",
+          "characterId": 2
+        },
+        "3": {
+          "chapterId": 1,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 3,
+          "textKey": "1_3_4",
+          "characterId": 2
+        },
+        "4": {
+          "chapterId": 1,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 4,
+          "textKey": "1_3_5",
+          "characterId": 2
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 1,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "1_1_1",
+          "characterId": 0
+        },
+        "1": {
+          "chapterId": 1,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "1_1_2",
+          "characterId": 0
+        },
+        "2": {
+          "chapterId": 1,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "1_1_3",
+          "characterId": 0
+        }
+      }
+    }
+  },
+  "2": {
+    "finish": {
+      "4": {
+        "0": {
+          "chapterId": 2,
+          "triggerType": "finish",
+          "stageId": 4,
+          "lineIndex": 0,
+          "textKey": "2_2_1",
+          "characterId": 4
+        },
+        "1": {
+          "chapterId": 2,
+          "triggerType": "finish",
+          "stageId": 4,
+          "lineIndex": 1,
+          "textKey": "2_2_2",
+          "characterId": 4
+        },
+        "2": {
+          "chapterId": 2,
+          "triggerType": "finish",
+          "stageId": 4,
+          "lineIndex": 2,
+          "textKey": "2_2_3",
+          "characterId": 4
+        }
+      },
+      "8": {
+        "0": {
+          "chapterId": 2,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 0,
+          "textKey": "2_3_1",
+          "characterId": 5
+        },
+        "1": {
+          "chapterId": 2,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 1,
+          "textKey": "2_3_2",
+          "characterId": 5
+        },
+        "2": {
+          "chapterId": 2,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 2,
+          "textKey": "2_3_3",
+          "characterId": 6
+        },
+        "3": {
+          "chapterId": 2,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 3,
+          "textKey": "2_3_4",
+          "characterId": 5
+        },
+        "4": {
+          "chapterId": 2,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 4,
+          "textKey": "2_3_5",
+          "characterId": 5
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 2,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "2_1_1",
+          "characterId": 3
+        },
+        "1": {
+          "chapterId": 2,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "2_1_2",
+          "characterId": 3
+        },
+        "2": {
+          "chapterId": 2,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "2_1_3",
+          "characterId": 3
+        }
+      }
+    }
+  },
+  "3": {
+    "finish": {
+      "5": {
+        "0": {
+          "chapterId": 3,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 0,
+          "textKey": "3_2_1",
+          "characterId": 7
+        },
+        "1": {
+          "chapterId": 3,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 1,
+          "textKey": "3_2_2",
+          "characterId": 7
+        },
+        "2": {
+          "chapterId": 3,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 2,
+          "textKey": "3_2_3",
+          "characterId": 7
+        }
+      },
+      "9": {
+        "0": {
+          "chapterId": 3,
+          "triggerType": "finish",
+          "stageId": 9,
+          "lineIndex": 0,
+          "textKey": "3_3_1",
+          "characterId": 8
+        },
+        "1": {
+          "chapterId": 3,
+          "triggerType": "finish",
+          "stageId": 9,
+          "lineIndex": 1,
+          "textKey": "3_3_2",
+          "characterId": 8
+        },
+        "2": {
+          "chapterId": 3,
+          "triggerType": "finish",
+          "stageId": 9,
+          "lineIndex": 2,
+          "textKey": "3_3_3",
+          "characterId": 8
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 3,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "3_1_1",
+          "characterId": 7
+        },
+        "1": {
+          "chapterId": 3,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "3_1_2",
+          "characterId": 7
+        },
+        "2": {
+          "chapterId": 3,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "3_1_3",
+          "characterId": 7
+        }
+      }
+    }
+  },
+  "4": {
+    "finish": {
+      "5": {
+        "0": {
+          "chapterId": 4,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 0,
+          "textKey": "4_2_1",
+          "characterId": 10
+        },
+        "1": {
+          "chapterId": 4,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 1,
+          "textKey": "4_2_2",
+          "characterId": 10
+        },
+        "2": {
+          "chapterId": 4,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 2,
+          "textKey": "4_2_3",
+          "characterId": 10
+        }
+      },
+      "8": {
+        "0": {
+          "chapterId": 4,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 0,
+          "textKey": "4_3_1",
+          "characterId": 11
+        },
+        "1": {
+          "chapterId": 4,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 1,
+          "textKey": "4_3_2",
+          "characterId": 11
+        },
+        "2": {
+          "chapterId": 4,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 2,
+          "textKey": "4_3_3",
+          "characterId": 11
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 4,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "4_1_1",
+          "characterId": 9
+        },
+        "1": {
+          "chapterId": 4,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "4_1_2",
+          "characterId": 9
+        },
+        "2": {
+          "chapterId": 4,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "4_1_3",
+          "characterId": 9
+        }
+      }
+    }
+  },
+  "5": {
+    "finish": {
+      "4": {
+        "0": {
+          "chapterId": 5,
+          "triggerType": "finish",
+          "stageId": 4,
+          "lineIndex": 0,
+          "textKey": "5_2_1",
+          "characterId": 13
+        },
+        "1": {
+          "chapterId": 5,
+          "triggerType": "finish",
+          "stageId": 4,
+          "lineIndex": 1,
+          "textKey": "5_2_2",
+          "characterId": 13
+        },
+        "2": {
+          "chapterId": 5,
+          "triggerType": "finish",
+          "stageId": 4,
+          "lineIndex": 2,
+          "textKey": "5_2_3",
+          "characterId": 13
+        }
+      },
+      "7": {
+        "0": {
+          "chapterId": 5,
+          "triggerType": "finish",
+          "stageId": 7,
+          "lineIndex": 0,
+          "textKey": "5_3_1",
+          "characterId": 14
+        },
+        "1": {
+          "chapterId": 5,
+          "triggerType": "finish",
+          "stageId": 7,
+          "lineIndex": 1,
+          "textKey": "5_3_2",
+          "characterId": 14
+        },
+        "2": {
+          "chapterId": 5,
+          "triggerType": "finish",
+          "stageId": 7,
+          "lineIndex": 2,
+          "textKey": "5_3_3",
+          "characterId": 14
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 5,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "5_1_1",
+          "characterId": 12
+        },
+        "1": {
+          "chapterId": 5,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "5_1_2",
+          "characterId": 12
+        },
+        "2": {
+          "chapterId": 5,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "5_1_3",
+          "characterId": 12
+        }
+      }
+    }
+  },
+  "6": {
+    "finish": {
+      "6": {
+        "0": {
+          "chapterId": 6,
+          "triggerType": "finish",
+          "stageId": 6,
+          "lineIndex": 0,
+          "textKey": "6_2_1",
+          "characterId": 16
+        },
+        "1": {
+          "chapterId": 6,
+          "triggerType": "finish",
+          "stageId": 6,
+          "lineIndex": 1,
+          "textKey": "6_2_2",
+          "characterId": 16
+        },
+        "2": {
+          "chapterId": 6,
+          "triggerType": "finish",
+          "stageId": 6,
+          "lineIndex": 2,
+          "textKey": "6_2_3",
+          "characterId": 16
+        }
+      },
+      "9": {
+        "0": {
+          "chapterId": 6,
+          "triggerType": "finish",
+          "stageId": 9,
+          "lineIndex": 0,
+          "textKey": "6_3_1",
+          "characterId": 17
+        },
+        "1": {
+          "chapterId": 6,
+          "triggerType": "finish",
+          "stageId": 9,
+          "lineIndex": 1,
+          "textKey": "6_3_2",
+          "characterId": 17
+        },
+        "2": {
+          "chapterId": 6,
+          "triggerType": "finish",
+          "stageId": 9,
+          "lineIndex": 2,
+          "textKey": "6_3_3",
+          "characterId": 17
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 6,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "6_1_1",
+          "characterId": 15
+        },
+        "1": {
+          "chapterId": 6,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "6_1_2",
+          "characterId": 15
+        },
+        "2": {
+          "chapterId": 6,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "6_1_3",
+          "characterId": 15
+        }
+      }
+    }
+  },
+  "7": {
+    "finish": {
+      "5": {
+        "0": {
+          "chapterId": 7,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 0,
+          "textKey": "7_2_1",
+          "characterId": 19
+        },
+        "1": {
+          "chapterId": 7,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 1,
+          "textKey": "7_2_2",
+          "characterId": 19
+        },
+        "2": {
+          "chapterId": 7,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 2,
+          "textKey": "7_2_3",
+          "characterId": 19
+        }
+      },
+      "8": {
+        "0": {
+          "chapterId": 7,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 0,
+          "textKey": "7_3_1",
+          "characterId": 20
+        },
+        "1": {
+          "chapterId": 7,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 1,
+          "textKey": "7_3_2",
+          "characterId": 20
+        },
+        "2": {
+          "chapterId": 7,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 2,
+          "textKey": "7_3_3",
+          "characterId": 20
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 7,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "7_1_1",
+          "characterId": 18
+        },
+        "1": {
+          "chapterId": 7,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "7_1_2",
+          "characterId": 18
+        },
+        "2": {
+          "chapterId": 7,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "7_1_3",
+          "characterId": 18
+        }
+      }
+    }
+  },
+  "8": {
+    "finish": {
+      "6": {
+        "0": {
+          "chapterId": 8,
+          "triggerType": "finish",
+          "stageId": 6,
+          "lineIndex": 0,
+          "textKey": "8_2_1",
+          "characterId": 22
+        },
+        "1": {
+          "chapterId": 8,
+          "triggerType": "finish",
+          "stageId": 6,
+          "lineIndex": 1,
+          "textKey": "8_2_2",
+          "characterId": 22
+        },
+        "2": {
+          "chapterId": 8,
+          "triggerType": "finish",
+          "stageId": 6,
+          "lineIndex": 2,
+          "textKey": "8_2_3",
+          "characterId": 22
+        }
+      },
+      "9": {
+        "0": {
+          "chapterId": 8,
+          "triggerType": "finish",
+          "stageId": 9,
+          "lineIndex": 0,
+          "textKey": "8_3_1",
+          "characterId": 23
+        },
+        "1": {
+          "chapterId": 8,
+          "triggerType": "finish",
+          "stageId": 9,
+          "lineIndex": 1,
+          "textKey": "8_3_2",
+          "characterId": 23
+        },
+        "2": {
+          "chapterId": 8,
+          "triggerType": "finish",
+          "stageId": 9,
+          "lineIndex": 2,
+          "textKey": "8_3_3",
+          "characterId": 23
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 8,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "8_1_1",
+          "characterId": 21
+        },
+        "1": {
+          "chapterId": 8,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "8_1_2",
+          "characterId": 21
+        },
+        "2": {
+          "chapterId": 8,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "8_1_3",
+          "characterId": 21
+        }
+      }
+    }
+  },
+  "9": {
+    "finish": {
+      "5": {
+        "0": {
+          "chapterId": 9,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 0,
+          "textKey": "9_2_1",
+          "characterId": 25
+        },
+        "1": {
+          "chapterId": 9,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 1,
+          "textKey": "9_2_2",
+          "characterId": 25
+        },
+        "2": {
+          "chapterId": 9,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 2,
+          "textKey": "9_2_3",
+          "characterId": 25
+        }
+      },
+      "8": {
+        "0": {
+          "chapterId": 9,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 0,
+          "textKey": "9_3_1",
+          "characterId": 26
+        },
+        "1": {
+          "chapterId": 9,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 1,
+          "textKey": "9_3_2",
+          "characterId": 26
+        },
+        "2": {
+          "chapterId": 9,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 2,
+          "textKey": "9_3_3",
+          "characterId": 26
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 9,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "9_1_1",
+          "characterId": 24
+        },
+        "1": {
+          "chapterId": 9,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "9_1_2",
+          "characterId": 24
+        },
+        "2": {
+          "chapterId": 9,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "9_1_3",
+          "characterId": 24
+        }
+      }
+    }
+  },
+  "10": {
+    "finish": {
+      "5": {
+        "0": {
+          "chapterId": 10,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 0,
+          "textKey": "10_2_1",
+          "characterId": 31
+        },
+        "1": {
+          "chapterId": 10,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 1,
+          "textKey": "10_2_2",
+          "characterId": 31
+        },
+        "2": {
+          "chapterId": 10,
+          "triggerType": "finish",
+          "stageId": 5,
+          "lineIndex": 2,
+          "textKey": "10_2_3",
+          "characterId": 28
+        }
+      },
+      "8": {
+        "0": {
+          "chapterId": 10,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 0,
+          "textKey": "10_3_1",
+          "characterId": 29
+        },
+        "1": {
+          "chapterId": 10,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 1,
+          "textKey": "10_3_2",
+          "characterId": 32
+        },
+        "2": {
+          "chapterId": 10,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 2,
+          "textKey": "10_3_3",
+          "characterId": 32
+        },
+        "3": {
+          "chapterId": 10,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 3,
+          "textKey": "10_3_4",
+          "characterId": 29
+        },
+        "4": {
+          "chapterId": 10,
+          "triggerType": "finish",
+          "stageId": 8,
+          "lineIndex": 4,
+          "textKey": "10_3_5",
+          "characterId": 29
+        }
+      }
+    },
+    "enter": {
+      "-1": {
+        "0": {
+          "chapterId": 10,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 0,
+          "textKey": "10_1_1",
+          "characterId": 27
+        },
+        "1": {
+          "chapterId": 10,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 1,
+          "textKey": "10_1_2",
+          "characterId": 27
+        },
+        "2": {
+          "chapterId": 10,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 2,
+          "textKey": "10_1_3",
+          "characterId": 30
+        },
+        "3": {
+          "chapterId": 10,
+          "triggerType": "enter",
+          "stageId": -1,
+          "lineIndex": 3,
+          "textKey": "10_1_4",
+          "characterId": 27
+        }
+      }
+    }
+  }
+}

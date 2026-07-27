@@ -1,0 +1,1034 @@
+{
+  "1": {
+    "0": {
+      "chapterId": 1,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_window.png",
+      "iconX": 256,
+      "iconY": 605,
+      "iconZ": 0,
+      "buildCost": 2,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "1": {
+      "chapterId": 1,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_sofa.png",
+      "iconX": 251,
+      "iconY": 155,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 1,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_fireplace.png",
+      "iconX": -366,
+      "iconY": 372,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 1,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_fire.png",
+      "iconX": -278,
+      "iconY": 35,
+      "iconZ": 0,
+      "buildCost": 3,
+      "textId": 2,
+      "finishAudioName": "e_housefix_match_ignite"
+    },
+    "4": {
+      "chapterId": 1,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_toy.png",
+      "iconX": 274,
+      "iconY": -367,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 1,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": 84,
+      "iconY": 22,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 1,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_board.png",
+      "iconX": -283,
+      "iconY": -182,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 1,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": -19,
+      "iconY": 671,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "8": {
+      "chapterId": 1,
+      "stageId": 8,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": -345,
+      "iconY": -522,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  },
+  "2": {
+    "0": {
+      "chapterId": 2,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_window.png",
+      "iconX": 18,
+      "iconY": 340,
+      "iconZ": 0,
+      "buildCost": 3,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "1": {
+      "chapterId": 2,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_sofa.png",
+      "iconX": 271,
+      "iconY": -31,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 2,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_board.png",
+      "iconX": -355,
+      "iconY": -568,
+      "iconZ": 0,
+      "buildCost": 4,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 2,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_door.png",
+      "iconX": -350,
+      "iconY": 114,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "4": {
+      "chapterId": 2,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_blanket.png",
+      "iconX": 191,
+      "iconY": -629,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 2,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 2,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": -138,
+      "iconY": -326,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 2,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_cabinet.png",
+      "iconX": 367,
+      "iconY": 256,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 2,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": 167,
+      "iconY": 678,
+      "iconZ": 0,
+      "buildCost": 4,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "8": {
+      "chapterId": 2,
+      "stageId": 8,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": 198,
+      "iconY": -630,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  },
+  "3": {
+    "0": {
+      "chapterId": 3,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_fire_ext.png",
+      "iconX": 207,
+      "iconY": -89,
+      "iconZ": 0,
+      "buildCost": 3,
+      "textId": 0,
+      "finishAudioName": "e_housefix_extinguisher"
+    },
+    "1": {
+      "chapterId": 3,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_fridge.png",
+      "iconX": -360,
+      "iconY": 114,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 3,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_window.png",
+      "iconX": -238,
+      "iconY": 558,
+      "iconZ": 0,
+      "buildCost": 3,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 3,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_wrench.png",
+      "iconX": -159,
+      "iconY": 261,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "4": {
+      "chapterId": 3,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_board.png",
+      "iconX": 226,
+      "iconY": -461,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 3,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_kitchen.png",
+      "iconX": 272,
+      "iconY": 172,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 3,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": -330,
+      "iconY": -326,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 3,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_cabinet.png",
+      "iconX": 226,
+      "iconY": 597,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "8": {
+      "chapterId": 3,
+      "stageId": 8,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": -59,
+      "iconY": 678,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "9": {
+      "chapterId": 3,
+      "stageId": 9,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": -319,
+      "iconY": -552,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  },
+  "4": {
+    "0": {
+      "chapterId": 4,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_house.png",
+      "iconX": 291,
+      "iconY": 482,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "1": {
+      "chapterId": 4,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": 36,
+      "iconY": 658,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 4,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_toy.png",
+      "iconX": -375,
+      "iconY": -42,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 4,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_campfire.png",
+      "iconX": 283,
+      "iconY": -430,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "4": {
+      "chapterId": 4,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_hammer.png",
+      "iconX": -108,
+      "iconY": 455,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 4,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_board.png",
+      "iconX": -227,
+      "iconY": -556,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 4,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_wrench.png",
+      "iconX": 392,
+      "iconY": -616,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 4,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": -46,
+      "iconY": -158,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "e_housefix_dog_happy"
+    },
+    "8": {
+      "chapterId": 4,
+      "stageId": 8,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": -381,
+      "iconY": -199,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  },
+  "5": {
+    "0": {
+      "chapterId": 5,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_window.png",
+      "iconX": -144,
+      "iconY": 409,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "1": {
+      "chapterId": 5,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_cabinet.png",
+      "iconX": 403,
+      "iconY": 128,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 5,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_wrench.png",
+      "iconX": -374,
+      "iconY": 316,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 5,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_hammer.png",
+      "iconX": 269,
+      "iconY": 453,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "4": {
+      "chapterId": 5,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_board.png",
+      "iconX": -331,
+      "iconY": -253,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 5,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": 266,
+      "iconY": -225,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 5,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": -53,
+      "iconY": 676,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 5,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": 366,
+      "iconY": -596,
+      "iconZ": 0,
+      "buildCost": 10,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  },
+  "6": {
+    "0": {
+      "chapterId": 6,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_fire_ext.png",
+      "iconX": -33,
+      "iconY": -24,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "e_housefix_extinguisher"
+    },
+    "1": {
+      "chapterId": 6,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_blanket.png",
+      "iconX": -289,
+      "iconY": -596,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 6,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_cabinet.png",
+      "iconX": 338,
+      "iconY": -132,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 6,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_bed.png",
+      "iconX": -44,
+      "iconY": -69,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "4": {
+      "chapterId": 6,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_hammer.png",
+      "iconX": -301,
+      "iconY": -303,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 6,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_toy.png",
+      "iconX": 384,
+      "iconY": -633,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 6,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_window.png",
+      "iconX": 187,
+      "iconY": 322,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 6,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": -68,
+      "iconY": -369,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "8": {
+      "chapterId": 6,
+      "stageId": 8,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": -136,
+      "iconY": 697,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "9": {
+      "chapterId": 6,
+      "stageId": 9,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": -349,
+      "iconY": -592,
+      "iconZ": 0,
+      "buildCost": 10,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  },
+  "7": {
+    "0": {
+      "chapterId": 7,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_board.png",
+      "iconX": -304,
+      "iconY": -351,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "1": {
+      "chapterId": 7,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_bookshelf.png",
+      "iconX": 111,
+      "iconY": 368,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 7,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_sofa.png",
+      "iconX": 370,
+      "iconY": -100,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 7,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": -97,
+      "iconY": 668,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "4": {
+      "chapterId": 7,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_hammer.png",
+      "iconX": -368,
+      "iconY": -83,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 7,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_window.png",
+      "iconX": -375,
+      "iconY": 335,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 7,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": 158,
+      "iconY": -241,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 7,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_toy.png",
+      "iconX": 237,
+      "iconY": -590,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "8": {
+      "chapterId": 7,
+      "stageId": 8,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": -342,
+      "iconY": -600,
+      "iconZ": 0,
+      "buildCost": 10,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  },
+  "8": {
+    "0": {
+      "chapterId": 8,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_door.png",
+      "iconX": 348,
+      "iconY": 181,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "1": {
+      "chapterId": 8,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_fireplace.png",
+      "iconX": -364,
+      "iconY": -67,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 8,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_board.png",
+      "iconX": 312,
+      "iconY": -427,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 8,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_window.png",
+      "iconX": 35,
+      "iconY": 364,
+      "iconZ": 0,
+      "buildCost": 5,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "4": {
+      "chapterId": 8,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_blanket.png",
+      "iconX": -282,
+      "iconY": -324,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 8,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_toy.png",
+      "iconX": -235,
+      "iconY": -578,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 8,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_sofa.png",
+      "iconX": 225,
+      "iconY": -109,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 8,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": 42,
+      "iconY": -329,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "8": {
+      "chapterId": 8,
+      "stageId": 8,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": 131,
+      "iconY": 640,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "9": {
+      "chapterId": 8,
+      "stageId": 9,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": -394,
+      "iconY": -340,
+      "iconZ": 0,
+      "buildCost": 10,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  },
+  "9": {
+    "0": {
+      "chapterId": 9,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_window.png",
+      "iconX": -380,
+      "iconY": 423,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "1": {
+      "chapterId": 9,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_cabinet.png",
+      "iconX": 6,
+      "iconY": 400,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 9,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_sofa.png",
+      "iconX": 122,
+      "iconY": -567,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 9,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_board.png",
+      "iconX": -308,
+      "iconY": 95,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "4": {
+      "chapterId": 9,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_bed.png",
+      "iconX": 225,
+      "iconY": -249,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 9,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_bookshelf.png",
+      "iconX": 290,
+      "iconY": 460,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 9,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": -167,
+      "iconY": 672,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 9,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": 42,
+      "iconY": 117,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "8": {
+      "chapterId": 9,
+      "stageId": 8,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": -318,
+      "iconY": -515,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  },
+  "10": {
+    "0": {
+      "chapterId": 10,
+      "stageId": 0,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_door.png",
+      "iconX": 235,
+      "iconY": 312,
+      "iconZ": 0,
+      "buildCost": 6,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "1": {
+      "chapterId": 10,
+      "stageId": 1,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_hammer.png",
+      "iconX": -142,
+      "iconY": 378,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "2": {
+      "chapterId": 10,
+      "stageId": 2,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_cabinet.png",
+      "iconX": -401,
+      "iconY": 174,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "3": {
+      "chapterId": 10,
+      "stageId": 3,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_board.png",
+      "iconX": 199,
+      "iconY": 71,
+      "iconZ": 0,
+      "buildCost": 7,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "4": {
+      "chapterId": 10,
+      "stageId": 4,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_blanket.png",
+      "iconX": 339,
+      "iconY": -597,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "5": {
+      "chapterId": 10,
+      "stageId": 5,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_wrench.png",
+      "iconX": -235,
+      "iconY": -78,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "6": {
+      "chapterId": 10,
+      "stageId": 6,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_lamp.png",
+      "iconX": 69,
+      "iconY": 648,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "7": {
+      "chapterId": 10,
+      "stageId": 7,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_clothing.png",
+      "iconX": 219,
+      "iconY": -251,
+      "iconZ": 0,
+      "buildCost": 8,
+      "textId": 0,
+      "finishAudioName": "-"
+    },
+    "8": {
+      "chapterId": 10,
+      "stageId": 8,
+      "iconPath": "Assets/Artwork/SpriteAtlas/Build2/BuildButton/rescue_icon_broom.png",
+      "iconX": -315,
+      "iconY": -509,
+      "iconZ": 0,
+      "buildCost": 9,
+      "textId": 3,
+      "finishAudioName": "e_housefix_broom_sweep"
+    }
+  }
+}

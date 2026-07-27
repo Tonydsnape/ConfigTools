@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('node:fs/promises');
+const fsSync = require('node:fs');
 const path = require('node:path');
 const { generateCSharp } = require('./codegen');
 const { commitOutput, createArtifacts, loadConfigurations } = require('./exporter');
@@ -60,8 +61,15 @@ async function syncUnityDirectory(target, files, extension) {
 }
 
 function resolveUnityRoot(configRoot, explicitRoot) {
-  const candidate = explicitRoot || process.env.MATCHINGGO_UNITY_ROOT || path.resolve(configRoot, '..');
-  return path.resolve(candidate);
+  const configured = explicitRoot || process.env.MATCHINGGO_UNITY_ROOT;
+  if (configured) return path.resolve(configured);
+
+  const embeddedParent = path.resolve(configRoot, '..');
+  if (
+    fsSync.existsSync(path.join(embeddedParent, 'Assets')) &&
+    fsSync.existsSync(path.join(embeddedParent, 'ProjectSettings'))
+  ) return embeddedParent;
+  return path.resolve(configRoot, '..', 'MatchingGoUnityDong');
 }
 
 async function syncUnity(unityRoot, configArtifacts, csharp) {

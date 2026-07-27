@@ -1,0 +1,782 @@
+{
+  "1": {
+    "1": {
+      "0": {
+        "chapterId": 1,
+        "stageId": 1,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "2": {
+      "0": {
+        "chapterId": 1,
+        "stageId": 2,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "3": {
+      "0": {
+        "chapterId": 1,
+        "stageId": 3,
+        "order": 0,
+        "requiredStageId": 2
+      }
+    },
+    "4": {
+      "0": {
+        "chapterId": 1,
+        "stageId": 4,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "5": {
+      "0": {
+        "chapterId": 1,
+        "stageId": 5,
+        "order": 0,
+        "requiredStageId": 1
+      },
+      "1": {
+        "chapterId": 1,
+        "stageId": 5,
+        "order": 1,
+        "requiredStageId": 3
+      },
+      "2": {
+        "chapterId": 1,
+        "stageId": 5,
+        "order": 2,
+        "requiredStageId": 4
+      }
+    },
+    "6": {
+      "0": {
+        "chapterId": 1,
+        "stageId": 6,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "7": {
+      "0": {
+        "chapterId": 1,
+        "stageId": 7,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "8": {
+      "0": {
+        "chapterId": 1,
+        "stageId": 8,
+        "order": 0,
+        "requiredStageId": 2
+      },
+      "1": {
+        "chapterId": 1,
+        "stageId": 8,
+        "order": 1,
+        "requiredStageId": 5
+      },
+      "2": {
+        "chapterId": 1,
+        "stageId": 8,
+        "order": 2,
+        "requiredStageId": 6
+      },
+      "3": {
+        "chapterId": 1,
+        "stageId": 8,
+        "order": 3,
+        "requiredStageId": 7
+      }
+    }
+  },
+  "2": {
+    "4": {
+      "0": {
+        "chapterId": 2,
+        "stageId": 4,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 2,
+        "stageId": 4,
+        "order": 1,
+        "requiredStageId": 2
+      },
+      "2": {
+        "chapterId": 2,
+        "stageId": 4,
+        "order": 2,
+        "requiredStageId": 3
+      }
+    },
+    "5": {
+      "0": {
+        "chapterId": 2,
+        "stageId": 5,
+        "order": 0,
+        "requiredStageId": 4
+      }
+    },
+    "8": {
+      "0": {
+        "chapterId": 2,
+        "stageId": 8,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 2,
+        "stageId": 8,
+        "order": 1,
+        "requiredStageId": 1
+      },
+      "2": {
+        "chapterId": 2,
+        "stageId": 8,
+        "order": 2,
+        "requiredStageId": 2
+      },
+      "3": {
+        "chapterId": 2,
+        "stageId": 8,
+        "order": 3,
+        "requiredStageId": 3
+      },
+      "4": {
+        "chapterId": 2,
+        "stageId": 8,
+        "order": 4,
+        "requiredStageId": 4
+      },
+      "5": {
+        "chapterId": 2,
+        "stageId": 8,
+        "order": 5,
+        "requiredStageId": 5
+      },
+      "6": {
+        "chapterId": 2,
+        "stageId": 8,
+        "order": 6,
+        "requiredStageId": 6
+      },
+      "7": {
+        "chapterId": 2,
+        "stageId": 8,
+        "order": 7,
+        "requiredStageId": 7
+      }
+    }
+  },
+  "3": {
+    "1": {
+      "0": {
+        "chapterId": 3,
+        "stageId": 1,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "2": {
+      "0": {
+        "chapterId": 3,
+        "stageId": 2,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "3": {
+      "0": {
+        "chapterId": 3,
+        "stageId": 3,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "4": {
+      "0": {
+        "chapterId": 3,
+        "stageId": 4,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "5": {
+      "0": {
+        "chapterId": 3,
+        "stageId": 5,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "6": {
+      "0": {
+        "chapterId": 3,
+        "stageId": 6,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 3,
+        "stageId": 6,
+        "order": 1,
+        "requiredStageId": 5
+      }
+    },
+    "7": {
+      "0": {
+        "chapterId": 3,
+        "stageId": 7,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "8": {
+      "0": {
+        "chapterId": 3,
+        "stageId": 8,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "9": {
+      "0": {
+        "chapterId": 3,
+        "stageId": 9,
+        "order": 0,
+        "requiredStageId": 1
+      },
+      "1": {
+        "chapterId": 3,
+        "stageId": 9,
+        "order": 1,
+        "requiredStageId": 2
+      },
+      "2": {
+        "chapterId": 3,
+        "stageId": 9,
+        "order": 2,
+        "requiredStageId": 3
+      },
+      "3": {
+        "chapterId": 3,
+        "stageId": 9,
+        "order": 3,
+        "requiredStageId": 4
+      },
+      "4": {
+        "chapterId": 3,
+        "stageId": 9,
+        "order": 4,
+        "requiredStageId": 5
+      },
+      "5": {
+        "chapterId": 3,
+        "stageId": 9,
+        "order": 5,
+        "requiredStageId": 6
+      },
+      "6": {
+        "chapterId": 3,
+        "stageId": 9,
+        "order": 6,
+        "requiredStageId": 7
+      },
+      "7": {
+        "chapterId": 3,
+        "stageId": 9,
+        "order": 7,
+        "requiredStageId": 8
+      }
+    }
+  },
+  "4": {
+    "7": {
+      "0": {
+        "chapterId": 4,
+        "stageId": 7,
+        "order": 0,
+        "requiredStageId": 2
+      },
+      "1": {
+        "chapterId": 4,
+        "stageId": 7,
+        "order": 1,
+        "requiredStageId": 5
+      }
+    },
+    "8": {
+      "0": {
+        "chapterId": 4,
+        "stageId": 8,
+        "order": 0,
+        "requiredStageId": 1
+      },
+      "1": {
+        "chapterId": 4,
+        "stageId": 8,
+        "order": 1,
+        "requiredStageId": 3
+      },
+      "2": {
+        "chapterId": 4,
+        "stageId": 8,
+        "order": 2,
+        "requiredStageId": 4
+      },
+      "3": {
+        "chapterId": 4,
+        "stageId": 8,
+        "order": 3,
+        "requiredStageId": 6
+      },
+      "4": {
+        "chapterId": 4,
+        "stageId": 8,
+        "order": 4,
+        "requiredStageId": 7
+      }
+    }
+  },
+  "5": {
+    "5": {
+      "0": {
+        "chapterId": 5,
+        "stageId": 5,
+        "order": 0,
+        "requiredStageId": 4
+      }
+    },
+    "7": {
+      "0": {
+        "chapterId": 5,
+        "stageId": 7,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 5,
+        "stageId": 7,
+        "order": 1,
+        "requiredStageId": 1
+      },
+      "2": {
+        "chapterId": 5,
+        "stageId": 7,
+        "order": 2,
+        "requiredStageId": 2
+      },
+      "3": {
+        "chapterId": 5,
+        "stageId": 7,
+        "order": 3,
+        "requiredStageId": 3
+      },
+      "4": {
+        "chapterId": 5,
+        "stageId": 7,
+        "order": 4,
+        "requiredStageId": 5
+      },
+      "5": {
+        "chapterId": 5,
+        "stageId": 7,
+        "order": 5,
+        "requiredStageId": 6
+      }
+    }
+  },
+  "6": {
+    "1": {
+      "0": {
+        "chapterId": 6,
+        "stageId": 1,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "2": {
+      "0": {
+        "chapterId": 6,
+        "stageId": 2,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "3": {
+      "0": {
+        "chapterId": 6,
+        "stageId": 3,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "4": {
+      "0": {
+        "chapterId": 6,
+        "stageId": 4,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "5": {
+      "0": {
+        "chapterId": 6,
+        "stageId": 5,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "6": {
+      "0": {
+        "chapterId": 6,
+        "stageId": 6,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "7": {
+      "0": {
+        "chapterId": 6,
+        "stageId": 7,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 6,
+        "stageId": 7,
+        "order": 1,
+        "requiredStageId": 4
+      },
+      "2": {
+        "chapterId": 6,
+        "stageId": 7,
+        "order": 2,
+        "requiredStageId": 6
+      }
+    },
+    "8": {
+      "0": {
+        "chapterId": 6,
+        "stageId": 8,
+        "order": 0,
+        "requiredStageId": 0
+      }
+    },
+    "9": {
+      "0": {
+        "chapterId": 6,
+        "stageId": 9,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 6,
+        "stageId": 9,
+        "order": 1,
+        "requiredStageId": 1
+      },
+      "2": {
+        "chapterId": 6,
+        "stageId": 9,
+        "order": 2,
+        "requiredStageId": 2
+      },
+      "3": {
+        "chapterId": 6,
+        "stageId": 9,
+        "order": 3,
+        "requiredStageId": 3
+      },
+      "4": {
+        "chapterId": 6,
+        "stageId": 9,
+        "order": 4,
+        "requiredStageId": 4
+      },
+      "5": {
+        "chapterId": 6,
+        "stageId": 9,
+        "order": 5,
+        "requiredStageId": 5
+      },
+      "6": {
+        "chapterId": 6,
+        "stageId": 9,
+        "order": 6,
+        "requiredStageId": 6
+      },
+      "7": {
+        "chapterId": 6,
+        "stageId": 9,
+        "order": 7,
+        "requiredStageId": 7
+      },
+      "8": {
+        "chapterId": 6,
+        "stageId": 9,
+        "order": 8,
+        "requiredStageId": 8
+      }
+    }
+  },
+  "7": {
+    "6": {
+      "0": {
+        "chapterId": 7,
+        "stageId": 6,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 7,
+        "stageId": 6,
+        "order": 1,
+        "requiredStageId": 5
+      }
+    },
+    "8": {
+      "0": {
+        "chapterId": 7,
+        "stageId": 8,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 7,
+        "stageId": 8,
+        "order": 1,
+        "requiredStageId": 1
+      },
+      "2": {
+        "chapterId": 7,
+        "stageId": 8,
+        "order": 2,
+        "requiredStageId": 2
+      },
+      "3": {
+        "chapterId": 7,
+        "stageId": 8,
+        "order": 3,
+        "requiredStageId": 3
+      },
+      "4": {
+        "chapterId": 7,
+        "stageId": 8,
+        "order": 4,
+        "requiredStageId": 4
+      },
+      "5": {
+        "chapterId": 7,
+        "stageId": 8,
+        "order": 5,
+        "requiredStageId": 5
+      },
+      "6": {
+        "chapterId": 7,
+        "stageId": 8,
+        "order": 6,
+        "requiredStageId": 6
+      },
+      "7": {
+        "chapterId": 7,
+        "stageId": 8,
+        "order": 7,
+        "requiredStageId": 7
+      }
+    }
+  },
+  "8": {
+    "7": {
+      "0": {
+        "chapterId": 8,
+        "stageId": 7,
+        "order": 0,
+        "requiredStageId": 6
+      }
+    },
+    "9": {
+      "0": {
+        "chapterId": 8,
+        "stageId": 9,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 8,
+        "stageId": 9,
+        "order": 1,
+        "requiredStageId": 1
+      },
+      "2": {
+        "chapterId": 8,
+        "stageId": 9,
+        "order": 2,
+        "requiredStageId": 2
+      },
+      "3": {
+        "chapterId": 8,
+        "stageId": 9,
+        "order": 3,
+        "requiredStageId": 3
+      },
+      "4": {
+        "chapterId": 8,
+        "stageId": 9,
+        "order": 4,
+        "requiredStageId": 4
+      },
+      "5": {
+        "chapterId": 8,
+        "stageId": 9,
+        "order": 5,
+        "requiredStageId": 5
+      },
+      "6": {
+        "chapterId": 8,
+        "stageId": 9,
+        "order": 6,
+        "requiredStageId": 6
+      },
+      "7": {
+        "chapterId": 8,
+        "stageId": 9,
+        "order": 7,
+        "requiredStageId": 7
+      },
+      "8": {
+        "chapterId": 8,
+        "stageId": 9,
+        "order": 8,
+        "requiredStageId": 8
+      }
+    }
+  },
+  "9": {
+    "7": {
+      "0": {
+        "chapterId": 9,
+        "stageId": 7,
+        "order": 0,
+        "requiredStageId": 5
+      }
+    },
+    "8": {
+      "0": {
+        "chapterId": 9,
+        "stageId": 8,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 9,
+        "stageId": 8,
+        "order": 1,
+        "requiredStageId": 1
+      },
+      "2": {
+        "chapterId": 9,
+        "stageId": 8,
+        "order": 2,
+        "requiredStageId": 2
+      },
+      "3": {
+        "chapterId": 9,
+        "stageId": 8,
+        "order": 3,
+        "requiredStageId": 3
+      },
+      "4": {
+        "chapterId": 9,
+        "stageId": 8,
+        "order": 4,
+        "requiredStageId": 4
+      },
+      "5": {
+        "chapterId": 9,
+        "stageId": 8,
+        "order": 5,
+        "requiredStageId": 5
+      },
+      "6": {
+        "chapterId": 9,
+        "stageId": 8,
+        "order": 6,
+        "requiredStageId": 6
+      },
+      "7": {
+        "chapterId": 9,
+        "stageId": 8,
+        "order": 7,
+        "requiredStageId": 7
+      }
+    }
+  },
+  "10": {
+    "7": {
+      "0": {
+        "chapterId": 10,
+        "stageId": 7,
+        "order": 0,
+        "requiredStageId": 5
+      }
+    },
+    "8": {
+      "0": {
+        "chapterId": 10,
+        "stageId": 8,
+        "order": 0,
+        "requiredStageId": 0
+      },
+      "1": {
+        "chapterId": 10,
+        "stageId": 8,
+        "order": 1,
+        "requiredStageId": 1
+      },
+      "2": {
+        "chapterId": 10,
+        "stageId": 8,
+        "order": 2,
+        "requiredStageId": 2
+      },
+      "3": {
+        "chapterId": 10,
+        "stageId": 8,
+        "order": 3,
+        "requiredStageId": 3
+      },
+      "4": {
+        "chapterId": 10,
+        "stageId": 8,
+        "order": 4,
+        "requiredStageId": 4
+      },
+      "5": {
+        "chapterId": 10,
+        "stageId": 8,
+        "order": 5,
+        "requiredStageId": 5
+      },
+      "6": {
+        "chapterId": 10,
+        "stageId": 8,
+        "order": 6,
+        "requiredStageId": 6
+      },
+      "7": {
+        "chapterId": 10,
+        "stageId": 8,
+        "order": 7,
+        "requiredStageId": 7
+      }
+    }
+  }
+}

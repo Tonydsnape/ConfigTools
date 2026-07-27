@@ -70,6 +70,14 @@ async function writeTypedNormal(filePath, options = {}) {
 test('current example workbooks generate one descriptor per real config table', async () => {
   const configurations = await loadConfigurations(ROOT);
   assert.deepEqual(configurations.map((config) => config.name), [
+    'BuildEventChapterConfig',
+    'BuildEventStageConfig',
+    'BuildEventStageDependencyConfig',
+    'BuildEventStageSpineConfig',
+    'BuildEventStageEffectConfig',
+    'BuildEventSpineConfig',
+    'BuildEventDialogueConfig',
+    'BuildEventAudioConfig',
     'GlobalBaseConfig',
     'ItemNormalConfig',
     'LocalizationTextConfig'
@@ -78,9 +86,9 @@ test('current example workbooks generate one descriptor per real config table', 
   assert.match(source, /public static class GlobalBaseConfig/);
   assert.match(source, /public static int StartGold/);
   assert.match(source, /TryGet\(int itemType, int itemId, out ItemNormalConfigRow row\)/);
-  assert.match(source, /TryGet\(string tableName, string textKey, out LocalizationTextConfigRow row\)/);
+  assert.match(source, /TryGet\(string tableName, string key, out LocalizationTextConfigRow row\)/);
   assert.match(source, /new ConfigDescriptor\("LocalizationTextConfig", false,/);
-  assert.doesNotMatch(source, /ConfigStage|StageId|EnsureLoadedAsync|ConfigLoadPolicy/);
+  assert.doesNotMatch(source, /ConfigStageDefinition|public const string StageId|EnsureLoadedAsync|ConfigLoadPolicy/);
 });
 
 test('JSON and MessagePack represent the same typed client data', async (t) => {
@@ -158,7 +166,12 @@ test('client pipeline emits only table JSON, bytes, and generated C#', async (t)
   assert.deepEqual(await fs.readdir(path.join(directory, 'Client', 'json')), ['SimpleBase.json']);
   assert.deepEqual(await fs.readdir(path.join(directory, 'Client', 'bytes')), ['SimpleBase.bytes']);
   assert.deepEqual(await fs.readdir(path.join(directory, 'Client', 'generated')), ['ConfigBindings.g.cs']);
-  assert.equal(resolveUnityRoot(directory), path.resolve(directory, '..'));
+  assert.equal(resolveUnityRoot(directory), path.resolve(directory, '..', 'MatchingGoUnityDong'));
+
+  const embeddedConfigRoot = path.join(directory, 'UnityProject', 'Config');
+  await fs.mkdir(path.join(directory, 'UnityProject', 'Assets'), { recursive: true });
+  await fs.mkdir(path.join(directory, 'UnityProject', 'ProjectSettings'), { recursive: true });
+  assert.equal(resolveUnityRoot(embeddedConfigRoot), path.join(directory, 'UnityProject'));
 });
 
 test('Unity sync removes obsolete stage and delivery artifacts', async (t) => {
